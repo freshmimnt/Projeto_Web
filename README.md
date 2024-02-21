@@ -10,7 +10,6 @@ O cliente poderá escolher entre um cabaz de frutas, hortaliças, carnes, peixes
 
 ## Público Alvo
 
-O nosso público são pessoas que querem ajudar os agricultores locais, pessoas que procurem um estilo de vida mais saudável, etc.
 
 ## Recursos Principais
 
