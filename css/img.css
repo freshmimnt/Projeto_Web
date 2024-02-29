@@ -1,0 +1,13 @@
+img {
+    width: 300px;
+    height: auto;
+    border-radius: 150px;
+    margin-right: 150px;
+}
+
+#cabecalho img {
+    border-radius: 50%;
+    width: 150px;
+    max-width: 100%;
+    height: auto;
+}
