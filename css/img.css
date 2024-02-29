@@ -5,9 +5,3 @@ img {
     margin-right: 150px;
 }
 
-#cabecalho img {
-    border-radius: 50%;
-    width: 150px;
-    max-width: 100%;
-    height: auto;
-}

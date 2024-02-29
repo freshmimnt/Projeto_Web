@@ -7,9 +7,3 @@ header {
     z-index: 1000; 
 }   
 
-#cabecalho {
-    display: flex;
-    justify-content:left;
-    align-items: center;
-    padding-right: 20px;
-}
