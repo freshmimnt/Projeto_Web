@@ -52,7 +52,9 @@ Ofereceremos várias opções de cabazes pensando nos diferentes perfis de clien
 
 ## Guião de teste
 
-O usuario entra no site, e decide criar a sua conta, caso o utilizador seja
+O utilizador entra no site, e irá encontrar 2 opções: criar conta ou iniciar sessão, caso ele não tenha uma conta criada irá escolher a opção de criar conta onde terá que introduzir o seu nome, email, telefone, morada e password, depois de todo preenchido terá a sua conta criada e pronta para fazer as suas compras.
+Com a sua conta criada o utilizador poderá ver no site a opção de cabaz que mais condiz consigo, quando ele tiver escolhido qual cabaz ele deseja comprar irá pôr no carrinho, uma vez tendo todo que quer no carrinho ele irá escolher a opção comprar no carrinho, irá confirmar a sua morada e depois inserir a sua forma de pagamento, uma vez o pagamento efetuado ele irá receber um email de confirmação.
+O utilizador poderá ir ao seu perfil onde terá as opções de ver o seu histórico de compras, acompanhar uma compra que tenha feito, alterar os seus dados e apagar a sua conta.
 
 ## Requisitos Funcionais
 
