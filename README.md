@@ -18,12 +18,14 @@ O público-alvo serão consumidores entre os 18 e 50 anos, pois eles são os que
 
 ## Características do Site
 
-Funcionalidades para Vendedores:
+### Funcionalidades para os Vendedores:
+
 Registo: Criação de conta com informações sobre o estabelecimento (nome, email, localização, horários, dia disponível para fazer a entrega).
 
 Painel de Controle: Visualização de estatísticas de vendas e desempenho, gerenciamento das vendas e do stock dos produtos.
 
-Funcionalidades para Consumidores:
+### Funcionalidades para os Compradores:
+
 Registo: Criação de conta com informações sobre o utilizador (nome, endereço, telefone, email e password).
 
 Pesquisa de Produtos: Procurar os produtos por categorias, nome, preço e outros critérios, visualização de fotos, descrições e avaliações.
@@ -32,7 +34,7 @@ Compra de Produtos: Seleção de produtos, escolha da opção de entrega (em cas
 
 Avaliação de Produtos: Compartilhamento de experiências e leitura de avaliações de outros clientes.
 
-Funcionalidades Gerais:
+### Funcionalidades Gerais:
 
 Sistema de Pagamento Seguro: Integração com Stripe para pagamentos online seguros e eficientes.
 
