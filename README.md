@@ -49,3 +49,15 @@ Base de dados feita com PostgreSQL.
 Disponível em português.
 
 ## Guião de teste
+
+### Comprador:
+
+Um futuro comprador entra no site, e irá encontrar 2 opções: criar conta ou iniciar sessão, caso ele não tenha uma conta criada irá escolher a opção de criar conta onde terá que introduzir o seu nome, email, telefone, morada e password, depois de ter tudo preenchido terá a sua conta criada e pronta para fazer as suas compras.
+Com a sua conta criada o utilizador poderá ver no site os diferentes produtos disponíveis e comprar os produtos que tem interesse, quando ele tiver escolhido todos os produtos que deseja comprar irá pôr no carrinho, uma vez tendo tudo que quer no carrinho ele irá escolher a opção comprar no carrinho, irá confirmar a sua morada, escolher se quer ir buscar os produtos no local ou receber em casa e depois irá inserir a sua forma de pagamento, uma vez o pagamento efetuado ele irá receber um email de confirmação da compra.
+
+O utilizador poderá ir ao seu perfil onde terá as opções de ver o seu histórico de compras, acompanhar uma compra que tenha feito, alterar os seus dados e apagar a sua conta.
+
+### Vendedor:
+
+Um futuro vendedor entra no site, e irá encontrar 2 opções: criar conta ou iniciar sessão, caso ele não tenha uma conta criada irá escolher a opção de criar conta onde terá que introduzir o seu nome, email, telefone, morada do estabelicimento, password e um documento que prove que a loja existe, depois de ter tudo preenchido a sua conta aguardara verificação e depois de verificada o vendedor terá a sua conta criada.
+Com a sua conta criada o vendedor terá o seu painelde controle onde poderá introduzir os produtos que irá vender e o preço deles, controlar os produtos vendidos e as entregas.
