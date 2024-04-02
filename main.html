@@ -3,23 +3,97 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Farm2U</title>
-    <link rel="icon" href="/img/logo-small.png" type="image/x-icon" />
-    <link rel="stylesheet" href="/css/img.css" type="text/css" />
-    <link rel="stylesheet" href="/css/estilo.css" type="text/css" />
-    <link rel="stylesheet" href="/css/cabecalho.css" type="text/css" />
-    <link rel="stylesheet" href="/css/font.css" type="text/css" />
+    <title>Farm2u</title>
+
+    <link rel="preconnect" href="html://fonts.googleapis.com" />
+    <link rel="preconnect" href="html://fonts.gstatic.com" crossorigin />
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <link
+      href="html://fonts.googleapis.com/css2?family=Roboto:wght@500;900&display=swap"
+      rel="styles"
+    />
   </head>
   <body>
     <header>
-      <h1 id="cabecalho">
-        <img src="/img/3.png" alt="Logo da pagina" />
-        <ul>
-          <li><a href="iniciar-sessao.html">Iniciar Sessão</a></li>
-          <li><a href="criar-conta.html">Criar Conta</a></li>
-        </ul>
-      </h1>
+      <div class="logo-nav">
+        <img src="img/logo.png" class="logo" />
+        <nav class="mt-1">
+          <a href="#">Home</a>
+          <a href="#">Blog</a>
+          <a href="#">Produtos</a>
+        </nav>
+      </div>
+      <a href="iniciar-sessao.html" class="button mt-1 mb-1 mx-auto">Login</a>
     </header>
-    <main></main>
+    <main>
+      <section class="content-section">
+        <div class="contect-left">
+          <h1 class="mt-2">
+            O seu <span class="text-primario">Marketplace</span> do Agro Negócio
+          </h1>
+          <p class="mt-2 mb-2">
+            Conectando o comércio local à consumidores conscientes
+          </p>
+        </div>
+        <img src="img/cabaz.jpg" class="cabaz.image" />
+      </section>
+      <section>
+        <div class="cards">
+          <article class="card">
+            <img src="img/comprar.png" />
+            <strong>Apoio ao comércio local</strong>
+            <p>
+              O Farm2U oferece apoio ao comércio local e agricultura
+              sustentável, permitindo que os usuários apoiem diretamente
+              pequenos negócios locais, agricultores familiares e produtores
+              artesanais em suas comunidades.
+            </p>
+          </article>
+          <article class="card">
+            <img src="img/foto.png" />
+            <strong>Facilidade de uso</strong>
+            <p>
+              Oferecemos uma experiência de compra online intuitiva e
+              conveniente. Os usuários podem navegar facilmente pelos produtos,
+              fazer pedidos com apenas alguns cliques e escolher entre opções de
+              entrega em casa ou retirada com o vendedor.
+            </p>
+          </article>
+          <article class="card">
+            <img src="img/fornecedor-alternativo.png" />
+            <strong>Variedade</strong>
+            <p>
+              Os usuários têm acesso a uma ampla variedade de produtos agrícolas
+              frescos e de alta qualidade, incluindo frutas, legumes, carnes,
+              laticínios e produtos artesanais, diretamente dos produtores e
+              comerciantes locais, atendendo às suas necessidades e
+              preferências.
+            </p>
+          </article>
+        </div>
+
+        <h2 class="text-center">
+          Descubra como ampliar suas vendas e alcançar novos clientes ao
+          registrar seu comércio no Farm2U - A plataforma líder em conectar
+          produtores locais com consumidores em busca de produtos frescos e de
+          boa qualidade!
+        </h2>
+        <a href="#">Registre seu negócio aqui</a>
+      </section>
+    </main>
+    <footer>
+      <div>
+        <p>Redes Sociais</p>
+        <p>Facebook</p>
+        <p>Instagram</p>
+      </div>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Blog</a>
+        <a href="#">Produtos</a>
+      </nav>
+    </footer>
   </body>
 </html>
