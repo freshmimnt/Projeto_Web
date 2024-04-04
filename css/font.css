@@ -1,0 +1,29 @@
+*{
+    font-family:sans-serif;
+}
+
+.input-box input{
+    font-size: 16px;
+}
+
+
+.input-box i{
+    font-size: 20px;
+}
+
+.wrapper .remember{
+    font-size: 14.5px;
+}
+
+.wrapper .btn{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.wrapper .register{
+    font-size: 14.5px;
+}
+
+.register p a{
+    font-weight: 600;
+}
