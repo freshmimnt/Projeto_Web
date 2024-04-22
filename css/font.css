@@ -27,3 +27,31 @@
 .register p a{
     font-weight: 600;
 }
+
+.title{
+    font-size: x-large;
+}
+
+.question h3{
+    font-size: medium;   
+}
+
+.answer p{
+    font-size: small;
+}
+.barra-verde h2 {
+    color: white;
+    font-size: 50px;
+    text-align: center;
+}
+
+.barra h2 {
+    color: white;
+    font-size: 40px;
+    text-align: center;
+}
+
+.ajust h2 {
+    font-size: 20px;
+   
+}

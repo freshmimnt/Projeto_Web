@@ -1,0 +1,144 @@
+body {
+    margin-left:auto;
+    margin-right: auto;
+}
+
+.barra-verde {
+    background-color: #3b5331;
+    padding: 20px;   
+    align-items: center;
+  }
+
+  .barra-verde p{
+    color: white;
+  }
+
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+}
+
+
+.produto {
+    display:flex;
+    flex-direction: column;
+    align-items:flex-start;
+    border: 3px solid #ccc5;
+    padding: 10px;
+     
+}
+
+.input-size {
+    width: 50px; 
+    padding: 5px; 
+    font-size: 15px; 
+    
+}
+
+
+.add_carrinho {
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    border: 0;
+    color: white;
+    font-size: large;
+    background-color: black;
+}
+
+
+.avaliacoes {
+    text-align: center;
+}
+
+
+.avaliacoes i {
+    font-size: 20px; 
+    color: gold; 
+    margin-right: 5px;
+    margin-bottom: 0;
+}
+
+.avaliacoes p {
+   margin-left: 5px; 
+   color: white;
+   margin-bottom: 0;
+}
+
+.avaliacoes p,
+.avaliacoes h2 {
+    display: inline-block; 
+    vertical-align: middle; 
+    margin-right: 100px; 
+    align-items: center;
+}
+
+.footer {
+    background-color: black;
+    color: azure;
+    text-align: center;
+    padding: 20px0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.title-avaliacao {
+    text-align: center;
+    font-size: 50px;
+    margin-top: 60px;
+}
+
+.avaliacoes-footer {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.avaliacoes-footer i {
+    font-size: 20px; 
+    color: gold; 
+    margin-right: 5px;
+}
+
+
+
+.avaliacoes-footer p {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20px; 
+    font-size: 60px;
+}
+
+.comentario {
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 3px solid #ccc5; 
+    padding-bottom: 15px;
+}
+
+.comentarios-footer {
+    flex-grow: 1;
+}
+
+.comentarios-footer i {
+    font-size: 10px;
+    color: gold;
+    margin-right: 5px;
+}
+
+.add_carrinho:hover {
+    background-color: orange; 
+}
+
+
+.add_carrinho:active {
+    background-color: darkorange; 
+}
+
+
+
+
+
+

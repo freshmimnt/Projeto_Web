@@ -44,6 +44,7 @@ header {
     height: 50px;
     margin: 30px 0;
     border: 2px solid black;
+    border-radius: 10px;
 }
 
 .input-box input{
@@ -53,10 +54,15 @@ header {
     border: none;
     outline: none;
     border: 2px solid rgba(255, 255, 255, .2);
-    border-radius: 40px;
+    border-radius: 100px;
     color: black;
     padding: 20px 45px 20px 20px;
-    
+}
+
+.input-box input.no-arrow{
+    -webkit-appearance: none; /* Remove arrow for WebKit (Safari, Chrome) */
+    -moz-appearance: textfield; /* Remove arrow for Firefox */
+    appearance: none; /* Remove arrow for other browsers */
 }
 
 .input-box input::placeholder{
