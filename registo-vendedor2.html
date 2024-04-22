@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registo de Informações Extras</title>
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="stylesheet" href="css/vendedor.css" />
+  </head>
+  <body>
+    <header>
+      <div class="head">
+        <i class="fa-solid">Farm2U</i>
+      </div>
+    </header>
+    <main class="container">
+      <section>
+        <div class="entregas">
+          <h1>Pretende fazer entregas?</h1>
+        </div>
+        <ul class="dias-semana">
+          <!-- Checkbox inputs for delivery days -->
+          <li>
+            <input
+              type="checkbox"
+              id="segunda-entrega"
+              name="diaSemanaEntrega"
+              value="segunda"
+            />
+            <label for="segunda-entrega">Segunda-Feira</label>
+            <input type="time" name="horaEntrega" id="hora-segunda-entrega" />
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              id="terca-entrega"
+              name="diaSemanaEntrega"
+              value="terca"
+            />
+            <label for="terca-entrega">Terça-Feira</label>
+            <input type="time" name="horaEntrega" id="hora-terca-entrega" />
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              id="quarta-entrega"
+              name="diaSemanaEntrega"
+              value="quarta"
+            />
+            <label for="quarta-entrega">Quarta-Feira</label>
+            <input type="time" name="horaEntrega" id="hora-quarta-entrega" />
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              id="quinta-entrega"
+              name="diaSemanaEntrega"
+              value="quinta"
+            />
+            <label for="quinta-entrega">Quinta-Feira</label>
+            <input type="time" name="horaEntrega" id="hora-quinta-entrega" />
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              id="sexta-entrega"
+              name="diaSemanaEntrega"
+              value="sexta"
+            />
+            <label for="sexta-entrega">Sexta-Feira</label>
+            <input type="time" name="horaEntrega" id="hora-sexta-entrega" />
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              id="sabado-entrega"
+              name="diaSemanaEntrega"
+              value="sabado"
+            />
+            <label for="sabado-entrega">Sábado</label>
+            <input type="time" name="horaEntrega" id="hora-sabado-entrega" />
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              id="domingo-entrega"
+              name="diaSemanaEntrega"
+              value="domingo"
+            />
+            <label for="domingo-entrega">Domingo</label>
+            <input type="time" name="horaEntrega" id="hora-domingo-entrega" />
+          </li>
+        </ul>
+      </section>
+      <section>
+        <div class="pick-up">
+          <h1>Terá Pick-Up?</h1>
+        </div>
+        <ul class="dias-semana">
+          <!-- Checkbox inputs for pick-up days -->
+          <li>
+            <input
+              type="checkbox"
+              id="segunda-pickup"
+              name="diaSemanaPickup"
+              value="segunda"
+            />
+            <label for="segunda-pickup">Segunda-Feira</label>
+            <input type="time" name="horaPickup" id="hora-segunda-pickup" />
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              id="terca-pickup"
+              name="diaSemanaPickup"
+              value="terca"
+            />
+            <label for="terca-pickup">Terça-Feira</label>
+            <input type="time" name="horaPickup" id="hora-terca-pickup" />
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              id="quarta-pickup"
+              name="diaSemanaPickup"
+              value="quarta"
+            />
+            <label for="quarta-pickup">Quarta-Feira</label>
+            <input type="time" name="horaPickup" id="hora-quarta-pickup" />
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              id="quinta-pickup"
+              name="diaSemanaPickup"
+              value="quinta"
+            />
+            <label for="quinta-pickup">Quinta-Feira</label>
+            <input type="time" name="horaPickup" id="hora-quinta-pickup" />
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              id="sexta-pickup"
+              name="diaSemanaPickup"
+              value="sexta"
+            />
+            <label for="sexta-pickup">Sexta-Feira</label>
+            <input type="time" name="horaPickup" id="hora-sexta-pickup" />
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              id="sabado-pickup"
+              name="diaSemanaPickup"
+              value="sabado"
+            />
+            <label for="sabado-pickup">Sábado</label>
+            <input type="time" name="horaPickup" id="hora-sabado-pickup" />
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              id="domingo-pickup"
+              name="diaSemanaPickup"
+              value="domingo"
+            />
+            <label for="domingo-pickup">Domingo</label>
+            <input type="time" name="horaPickup" id="hora-domingo-pickup" />
+          </li>
+        </ul>
+      </section>
+      <form>
+        <fieldset>
+          <div>
+            <label for="nome">Nome do Estabelecimento</label>
+            <input type="text" id="nome" name="nome" required />
+          </div>
+
+          <div>
+            <label for="morada">Morada</label>
+            <input type="text" id="morada" name="morada" required />
+          </div>
+
+          <div>
+            <label for="telemovel">Telemóvel</label>
+            <input type="tel" id="telemovel" name="telemovel" required />
+          </div>
+
+          <div>
+            <label for="nomeTitular">Nome do Titular da Conta Bancária</label>
+            <input type="text" id="nomeTitular" name="nomeTitular" required />
+          </div>
+
+          <div>
+            <label for="iban">IBAN</label>
+            <input type="text" id="iban" name="iban" required />
+          </div>
+
+          <div>
+            <label for="escolhaOpcao">Tipo de Comércio</label>
+            <select id="escolhaOpcao" name="escolhaOpcao" required>
+              <option value="">Selecionar</option>
+              <option value="agricultor">Agricultor</option>
+              <option value="mercearia">Mercearia</option>
+              <option value="talho">Talho</option>
+              <option value="peixaria">Peixaria</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="uploadDocumentoFrente"
+              >Foto do Documento de Identificação (FRENTE)</label
+            >
+            <input
+              type="file"
+              id="uploadDocumentoFrente"
+              name="documentoFrente"
+              accept="image/*"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="uploadDocumentoVerso"
+              >Foto do Documento de Identificação (VERSO)</label
+            >
+            <input
+              type="file"
+              id="uploadDocumentoVerso"
+              name="documentoVerso"
+              accept="image/*"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="uploadIban">Foto Comprovativo IBAN</label>
+            <input
+              type="file"
+              id="uploadIban"
+              name="documentoIban"
+              accept="image/*"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="uploadLicenca">Foto da Licença Comercial</label>
+            <input
+              type="file"
+              id="uploadLicenca"
+              name="documentoLicenca"
+              accept="image/*"
+              required
+            />
+          </div>
+          <form action="/registo-vendedor3.html">
+            <button type="submit">Próximo</button>
+          </form>
+        </fieldset>
+      </form>
+    </main>
+  </body>
+</html>

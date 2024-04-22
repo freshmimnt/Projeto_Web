@@ -1,0 +1,107 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.profile-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile header styles */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Edit profile button styles */
+#edit-profile-btn {
+    background-color: #3B5331;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Profile picture styles */
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc; /* Placeholder color */
+    border-radius: 50%;
+}
+
+/* User details styles */
+.user-details {
+    margin-left: 20px;
+}
+
+.user-details h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.user-details p {
+    margin: 5px 0;
+    color: #666;
+}
+
+/* Editable input fields styles */
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    display: none;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+/* Order history styles */
+.order-history h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.order {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.order h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.order p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.logo{
+    color: #3b5331; 
+    font-size: 60px; 
+    font-family: Inter; 
+    font-weight: 400; 
+    font-style: normal;
+}

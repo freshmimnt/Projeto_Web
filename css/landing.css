@@ -1,0 +1,96 @@
+
+
+.back{
+    background: url(/img/landing.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+}
+
+.content {
+    background: rgba(255, 255, 255, 0.7) ;
+    padding: 20px;
+}
+
+.content h2 {
+    margin: 0; 
+ }
+  
+ .seller-btn{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.title h2 {
+    text-align: center;
+}
+
+.seller {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10%;
+    margin-left: 20%;
+    
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+}
+
+.list a{
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px solid black;
+}
+
+.footer {
+    background-color: black;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+    color: aqua;
+    bottom: 0;
+}
+
+.accordion{
+    background-color: transparent;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid black;
+    border-left: none; 
+    border-right: none; 
+    border-top: none;
+    outline: none;
+    transition: 0.4s;
+    display: flex;
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+
+}
+
+.panel a{
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+.right{
+    width: 100%;
+    margin-left: auto;
+}
+
