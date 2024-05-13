@@ -55,3 +55,16 @@
     font-size: 20px;
    
 }
+
+.topnav .logo a{
+    font-size: 40px;
+    font-family: sans-serif;
+}
+
+.topnav a {
+    font-size: 40px;
+}
+
+.topnav .dropdown-content a{
+    font-size: 10px;
+}

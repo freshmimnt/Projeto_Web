@@ -1,0 +1,23 @@
+{
+  "name": "projeto_web-farm2u",
+  "version": "1.0.0",
+  "description": "O Farm2U é uma plataforma inovadora que se propõe a revolucionar o mercado do agronegócio, oferecendo um Marketplace exclusivo para produtos agrícolas frescos e de alta qualidade. O nosso objetivo é criar oportunidades para pequenos negócios e agricultores expandirem as suas vendas online, ao mesmo tempo, em que proporcionamos aos consumidores uma experiência única de consumo de produtos frescos e locais.\r No nosso Marketplace, os consumidores terão acesso a uma ampla variedade de alimentos agrícolas, incluindo legumes, frutas, hortaliças, carnes, peixes, queijos e embutidos, tudo diretamente dos produtores e comércios locais.\r Os pequenos comerciantes, como mercearias, talhos, peixarias e agricultores, podem se registar facilmente na nossa plataforma, fornecendo informações essenciais sobre os seus estabelecimentos, como nome, localização, horários e dias de entrega.",
+  "main": "server.js",
+  "scripts": {
+    "dev": "npx nodemon server.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "pg": "^8.11.5",
+    "pg-promise": "^11.6.0"
+  }
+}
