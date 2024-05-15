@@ -1,142 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pagina Inicial</title>
+    <title>Landing</title>
+    <link rel="stylesheet" href="css/Landing.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/font.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/landing.css" type="text/css" />
-    <link rel="stylesheet" href="/css/img.css" type="text/css" />
-    <link rel="stylesheet" href="/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="/css/header.css" type="text/css" />
   </head>
   <body>
     <header>
       <div class="topnav">
-        <div class="topnav-center">
-          <input type="text" placeholder="Search.." />
-          <button type="submit"><i class="bx bx-search-alt-2"></i></button>
-        </div>
         <div class="logo"><a href="/landing-page.html">Farm2U</a></div>
-
         <div class="topnav-right">
-          <a href="/carrinho.html"><i class="bx bxs-shopping-bag"></i></a>
-          <a href="/login-usuario.html"><i class="bx bx-user"></i></a>
+          <a href="/login-usuario.html">Criar Conta</a>
+          <a href="registo-comprador.html">Iniciar Sessão</a>
         </div>
       </div>
     </header>
-    <br />
-    <div class="back">
-      <div class="content">
-        <h2>Sua feira local em um clique: Bem-Vindo ao Farm2U.</h2>
-      </div>
-    </div>
-    <div class="right">
-      <div class="list">
-        <h3>Ordenar Por</h3>
-        <a href="#">Localização <i class="bx bx-map"></i></a>
-        <br />
-        <br />
-        <a href="">Com Entrega <i class="bx bxs-truck"></i></a>
-      </div>
-      <br />
-      <div class="comércio">
-        <h3>Categorias</h3>
-        <button class="accordion">
-          Agricultor<i class="bx bx-chevron-down"></i>
-        </button>
-        <div class="panel">
-          <p><a href="#">Fruta</a></p>
-          <p><a href="#">Legumes</a></p>
-          <p><a href="#">Bio</a></p>
-          <p><a href="#">Outros</a></p>
-        </div>
-        <button class="accordion">
-          Agricultor <i class="bx bx-chevron-down"></i>
-        </button>
-        <div class="panel">
-          <p><a href="#">Fruta</a></p>
-          <p><a href="#">Legumes</a></p>
-          <p><a href="#">Bio</a></p>
-          <p><a href="#">Outros</a></p>
-        </div>
-        <button class="accordion">
-          Agricultor<i class="bx bx-chevron-down"></i>
-        </button>
-        <div class="panel">
-          <p><a href="#">Fruta</a></p>
-          <p><a href="#">Legumes</a></p>
-          <p><a href="#">Bio</a></p>
-          <p><a href="#">Outros</a></p>
-        </div>
-        <button class="accordion">
-          Agricultor<i class="bx bx-chevron-down"></i>
-        </button>
-        <div class="panel">
-          <p><a href="#">Fruta</a></p>
-          <p><a href="#">Legumes</a></p>
-          <p><a href="#">Bio</a></p>
-          <p><a href="#">Outros</a></p>
-        </div>
+    <div class="cx-content">
+      <img src="img/vein.png" alt="" />
+      <div class="cx-text">
+        <h2>Seu Marketplace do Agro Negócio</h2>
+        <p>Escreva tua morada para ter acesso aos</p>
+        <p>vendedores mais próximos de si!</p>
+        <form action="/pesquisar" method="GET">
+          <input class="text" type="text" name="q" placeholder=" Sua morada" />
+          <input type="submit" value="Buscar" />
+        </form>
       </div>
     </div>
     <div class="seller">
-      <div class="title">
-        <h2>Vendedores Mais Populares</h2>
-      </div>
-      <div class="row">
-        <form action="#">
-          <button class="seller-btn">
-            <img src="/img/quinta.png" alt="" />
-            <h3>Quinta dos Santos</h3>
-            <h4>Agricultor</h4>
-          </button>
-        </form>
-        <form action="/pagina_da_loja.html">
-          <button class="seller-btn">
-            <img src="/img/mercearia.png" alt="" />
-            <h3>Mercearia do Bairro</h3>
-            <h4>Mercearia</h4>
-          </button>
-        </form>
-        <form action="#">
-          <button class="seller-btn">
-            <img src="/img/bio.png" alt="" />
-            <h3>Mercearia Bio</h3>
-            <h4>Mercearia</h4>
-          </button>
-        </form>
-      </div>
-      <div class="row">
-        <form action="#">
-          <button class="seller-btn">
-            <img src="/img/peixaria.png" alt="" />
-            <h3>Peixe Fresco</h3>
-            <h4>Peixaria</h4>
-          </button>
-        </form>
-        <form action="#">
-          <button class="seller-btn">
-            <img src="/img/talho.png" alt="" />
-            <h3>Talho Joaninha</h3>
-            <h4>Talho</h4>
-          </button>
-        </form>
-        <form action="#">
-          <button class="seller-btn">
-            <img src="/img/horta.png" alt="" />
-            <h3>Quintinha das Hortaliças</h3>
-            <h4>Agricultor</h4>
-          </button>
-        </form>
+      <h2>Registra-se como Vendedor</h2>
+      <div class="btn">
+        <a href="registo-vendedor.html"><button>Registra-se</button></a>
       </div>
     </div>
-    <script src="accordion.js"></script>
   </body>
-  <footer class="footer">
-    <p>Farm2U</p>
-  </footer>
+  <footer></footer>
 </html>

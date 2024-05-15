@@ -1,96 +1,76 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
 
-
-.back{
-    background: url(/img/landing.png) no-repeat;
-    background-size: cover;
-    background-position: center;
+.cx-content {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100px;
-}
-
-.content {
-    background: rgba(255, 255, 255, 0.7) ;
+    align-items: flex-start;
+    background-color: #DAAB4F;
     padding: 20px;
-}
-
-.content h2 {
     margin: 0; 
- }
-  
- .seller-btn{
-    background: transparent;
-    border: none;
-    cursor: pointer;
+    width: 100vw; 
+    box-sizing: border-box; 
 }
 
-.title h2 {
-    text-align: center;
+.cx-content img {
+    margin-right: 20px; /* espaço à direita da imagem */
 }
+
+.cx-text {
+    margin-left: 70px;
+    margin-top: 50px;
+    display: flex; /* exibir os elementos em linha */
+    flex-direction: column; /* dispor os elementos em coluna */
+
+}
+
+.cx-text h2, .cx-text p, .cx-text form {
+    margin: 0; /* remover margens padrão */
+    padding: 5px;
+    font-size: 35px;
+}
+
+.cx-text h2 {
+    font-size: 50px;
+}
+
+.text {
+    width: 300px; /* Defina a largura desejada */
+    padding: 10px; /* Adicione preenchimento interno */
+    font-size: 16px; /* Tamanho da fonte */
+    border: 1px solid #ccc; /* Adicione uma borda */
+    border-radius: 5px; /* Adicione bordas arredondadas */
+}
+
 
 .seller {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10%;
-    margin-left: 20%;
-    
+    display: flex; /* torna os elementos filhos em flex containers */
+    justify-content: center; /* alinha os elementos horizontalmente ao centro */
+    align-items: center; /* alinha os elementos verticalmente ao centro */
+    text-align: center; /* centraliza o texto dentro do h2 */
+    margin-top: 20px;
 }
 
-.row {
-    display: flex;
-    justify-content: space-around;
+.seller h2 {
+    margin-right: 20px; /* espaço entre o h2 e o botão */
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.list a{
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
-    border-bottom: 2px solid black;
+.seller button {
+    background-color: #548149; /* cor de fundo verde */
+    color: white; /* cor do texto */
+    border: none; /* remover borda */
+    padding: 10px 20px; /* ajustar o preenchimento conforme necessário */
+    cursor: pointer; /* cursor de mão ao passar */
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 5px;
 }
 
-.footer {
-    background-color: black;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 50px;
-    color: aqua;
-    bottom: 0;
+.seller button:hover {
+    background-color: #45a049; /* cor de fundo verde mais escura ao passar o mouse */
 }
 
-.accordion{
-    background-color: transparent;
-    cursor: pointer;
-    padding: 10px;
-    text-align: center;
-    border-bottom: 2px solid black;
-    border-left: none; 
-    border-right: none; 
-    border-top: none;
-    outline: none;
-    transition: 0.4s;
-    display: flex;
-}
-
-.panel {
-    padding: 0 18px;
-    background-color: white;
-    display: none;
-    overflow: hidden;
-
-}
-
-.panel a{
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
-    text-align: center;
-}
-
-.right{
-    width: 100%;
-    margin-left: auto;
-}
-
+ 
