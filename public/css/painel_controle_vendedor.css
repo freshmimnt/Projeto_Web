@@ -1,0 +1,299 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body{
+    height: 100vh;
+   
+}
+
+
+nav.menu-lateral{
+    width: 300px;
+    height: 100%;
+    background-color: #3E3C3C ;
+    padding: 40px 0 40px 1%;
+    box-shadow: 3px 0 0 #548149 ;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.btn-expandir{
+    width: 100%;
+    padding-left: 10px;
+}
+
+.btn-expandir > i{
+    color:white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+ul{
+    height: 100%;
+    list-style-type: none;
+}
+
+ul li.item-menu{
+    transition: .2s;
+}
+
+ul li.item-menu:hover{
+    background: #548149 ;
+}
+
+ul li.item-menu a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 4%;
+    display: flex;
+    margin-bottom: 20px;
+    line-height: 40px;
+
+}
+
+ul li.item-menu a .txt-link{
+    margin-left: 20px;
+}
+
+ul li.item-menu a .icon > i{
+    font-size: 40px;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+
+
+.content,
+.content-pick-ups {
+    flex: 1;
+    padding: 20px;
+    max-width: 30%;
+    overflow-x: auto;
+    margin-left: 300px;
+
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.text-color {
+    background-color: #548149;
+    font-size: 25px;
+    color: #f2f2f2;
+    font-style: oblique;
+}
+
+.spacer {
+    margin-right: 90px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.box-info {
+    width: calc(100% - 300); 
+    margin-left: 350px; 
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.box-info-single {
+    color: white;
+    border-radius: 15px;
+    flex: 1; 
+    margin: 0 10px;
+    padding: 30px;
+}
+
+.content-alinhar {
+    display: flex;
+    flex-direction: column;
+    align-items:baseline; 
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.grafico{
+    margin-top: 30px;    
+}
+
+
+.ad-produtos {
+    position:absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+
+.content-produtos {
+    margin-left: 300px; 
+    padding-top: 60px; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+
+.produto {
+    width: calc(33.33% - 20px); 
+    height: calc(25% - 20px);
+    margin: 10px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    text-align: center;
+}
+
+
+
+
+.icone-clickable {
+    cursor: pointer;
+}
+
+
+.icone-clickable {
+    margin-right: 20px; 
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 999; 
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    z-index: 1001; 
+}
+.btn {
+    background-color: black;
+    font-size: 20px;
+    color: white;
+}
+
+.content-pagamentos {
+    margin-left: 320px; 
+    padding-top: 40px; 
+    width: 1200px;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.content-pagamentos table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.content-pagamentos th, td {
+    border: 1px solid#ddd;
+    text-align: left;
+}
+
+.content-pagamentos h2 {
+    text-align: center;
+}
+
+.content-notificacao {
+    margin-left: 320px; 
+    padding-top: 30px;          
+}
+
+.p-pedido {
+    display: flex;
+    align-items: center; 
+    padding: 10px;
+}
+
+.p-pedido h2{
+    font-size: 50px;
+    margin-right: 20px;
+}
+.p-pedido p {
+    margin: 0; 
+    font-size: 30px;
+}
+
+.c-comentario {
+    display: flex;
+    align-items: center; 
+    padding: 10px;
+}
+
+.c-comentario h2{
+    font-size: 50px;
+    margin-right: 20px;
+}
+.c-comentario p {
+    margin: 0; 
+    font-size: 30px;
+}
+
+.pg-pagamento {
+    display: flex;
+    align-items: center; 
+    padding: 10px;
+}
+
+.pg-pagamento h2{
+    font-size: 50px;
+    margin-right: 20px;
+}
+.pg-pagamento p {
+    margin: 0; 
+    font-size: 30px;
+}

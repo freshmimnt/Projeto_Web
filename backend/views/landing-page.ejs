@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing</title>
+    <link rel="stylesheet" href="/css/landing.css" />
+    <link rel="stylesheet" href="/css/font.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    <div class="cx-content">
+      <img src="img/vein.png" alt="" />
+      <div class="cx-text">
+        <h2>Seu Marketplace do Agro Negócio</h2>
+        <p>Escreva tua morada para ter acesso aos</p>
+        <p>vendedores mais próximos de si!</p>
+        <form action="/pesquisar" method="GET">
+          <input class="text" type="text" name="q" placeholder=" Sua morada" />
+          <input type="submit" value="Buscar" />
+        </form>
+      </div>
+    </div>
+    <div class="seller">
+      <h2>Registra-se como Vendedor</h2>
+      <div class="btn">
+        <a href="/registo-vendedor"><button>Registra-se</button></a>
+      </div>
+    </div>
+    <%- include('partials/footer') %>
+  </body>
+</html>

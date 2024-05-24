@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="/css/painel_controle_vendedor.css" />
+
+    <title>Visão geral</title>
+  </head>
+  <body>
+    <nav class="menu-lateral">
+      <ul>
+        <li class="item-menu">
+          <a href="/gerenciamento">
+            <span class="icon"><i class="bi bi-kanban"></i></span>
+            <span class="txt-link">Gerenciamento de pedidos</span>
+          </a>
+        </li>
+        <li class="item-menu">
+          <a href="/geral">
+            <span class="icon"><i class="bi bi-tv"></i></span>
+            <span class="txt-link">Visão geral</span>
+          </a>
+        </li>
+        <li class="item-menu">
+          <a href="/produtos">
+            <span class="icon"><i class="bi bi-plus-circle"></i></span>
+            <span class="txt-link">Produtos</span>
+          </a>
+        </li>
+        <li class="item-menu">
+          <a href="#">
+            <span class="icon"></span>
+            <span class="txt-link"></span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="content-alinhar">
+      <div class="box-info">
+        <div style="background-color: #7595e7" class="box-info-single">
+          <div class="info-text">
+            <h3>Média dos preços: <%= average %></h3>
+          </div>
+        </div>
+        <div style="background-color: #e09135" class="box-info-single">
+          <div class="info-text">
+            <h3>Desvio padrão dos preços: <%= std %></h3>
+          </div>
+        </div>
+        <div style="background-color: #548149" class="box-info-single">
+          <div class="info-text">
+            <h3>Produto mais caro: <%= expensive %></h3>
+          </div>
+        </div>
+        <div style="background-color: #4757bf" class="box-info-single">
+          <div class="info-text">
+            <h3>Produto mais barato: <%= cheapest %></h3>
+          </div>
+        </div>
+      </div>
+      <div class="grafico">
+        <canvas id="grafico1" style="width: 900px; height: 500px"></canvas>
+        <canvas id="grafico2" style="width: 900px; height: 500px"></canvas>
+      </div>
+      <div>
+        <button onclick="generatePDF()">Gerar PDF</button>
+      </div>
+      <script>
+        const ctx1 = document.getElementById("grafico1");
+        const ctx2 = document.getElementById("grafico2");
+
+        let labelsX = [
+          "Janeiro",
+          "Fevereiro",
+          "Março",
+          "Abril",
+          "Maio",
+          "Junho",
+          "Julho",
+          "Agosto",
+          "Setembro",
+          "Outubro",
+          "Novembro",
+          "Dezembro",
+        ];
+        let valores = [4, 5, 2, 9, 11, 6, 8, 8, 3, 15, 10, 7];
+
+        new Chart(ctx1, {
+          type: "bar",
+          data: {
+            labels: labelsX,
+            datasets: [
+              {
+                label: "Vendas Mensais",
+                data: valores,
+                backgroundColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(255, 206, 86, 0.2)",
+                  "rgba(75, 192, 192, 0.2)",
+                  "rgba(153, 102, 255, 0.2)",
+                ],
+                borderColor: [
+                  "rgba(255, 99, 132, 1)",
+                  "rgba(54, 162, 235, 1)",
+                  "rgba(255, 206, 86, 1)",
+                  "rgba(75, 192, 192, 1)",
+                  "rgba(153, 102, 255, 1)",
+                  "rgba(255, 159, 64, 1)",
+                  "rgba(255, 99, 132, 1)",
+                  "rgba(54, 162, 235, 1)",
+                  "rgba(255, 206, 86, 1)",
+                  "rgba(75, 192, 192, 1)",
+                  "rgba(153, 102, 255, 1)",
+                  "rgba(255, 159, 64, 1)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+
+        const dataDonut = {
+          labels: ["Produto A", "Produto B", "Produto C", "Produto D"],
+          datasets: [
+            {
+              label: "Distribuição de Vendas",
+              data: [30, 20, 25, 25],
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        };
+
+        new Chart(ctx2, {
+          type: "doughnut",
+          data: dataDonut,
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: "top",
+              },
+              title: {
+                display: true,
+                text: "Distribuição de Vendas por Produto",
+              },
+            },
+          },
+        });
+      </script>
+      <script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
+      <script>
+        var props = {
+          outputType: jsPDFInvoiceTemplate.outputType.Save,
+          returnJsPDFDocObject: true,
+          fileName: "Invoice 2024",
+          orientationLandscape: false,
+          logo: {
+            src: "https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/logo.png",
+            type: "PNG",
+            width: 53.33,
+            height: 26.66,
+            margin: {
+              top: 0,
+              left: 0,
+            },
+          },
+          stamp: {
+            inAllPages: true,
+            src: "https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/qr_code.jpg",
+            type: "JPG",
+            width: 20,
+            height: 20,
+            margin: {
+              top: 0,
+              left: 0,
+            },
+          },
+          business: {
+            name: "Business Name",
+            address: "Albania, Tirane ish-Dogana, Durres 2001",
+            phone: "(+355) 069 11 11 111",
+            email: "email@example.com",
+            email_1: "info@example.al",
+            website: "www.example.al",
+          },
+          contact: {
+            label: "Invoice issued for:",
+            name: "Client Name",
+            address: "Albania, Tirane, Astir",
+            phone: "(+355) 069 22 22 222",
+            email: "client@website.al",
+            otherInfo: "www.website.al",
+          },
+          invoice: {
+            label: "Invoice #: ",
+            num: 19,
+            invDate: "Payment Date: 01/01/2021 18:12",
+            invGenDate: "Invoice Date: 02/02/2021 10:17",
+            headerBorder: false,
+            tableBodyBorder: false,
+            header: [
+              {
+                title: "#",
+                style: {
+                  width: 10,
+                },
+              },
+              {
+                title: "Title",
+                style: {
+                  width: 30,
+                },
+              },
+              {
+                title: "Description",
+                style: {
+                  width: 80,
+                },
+              },
+              { title: "Price" },
+              { title: "Quantity" },
+              { title: "Unit" },
+              { title: "Total" },
+            ],
+            table: Array.from(Array(10), (item, index) => [
+              index + 1,
+              "There are many variations ",
+              "Lorem Ipsum is simply dummy text dummy text ",
+              200.5,
+              4.5,
+              "m2",
+              400.5,
+            ]),
+            additionalRows: [
+              {
+                col1: "Total:",
+                col2: "145,250.50",
+                col3: "ALL",
+                style: {
+                  fontSize: 14,
+                },
+              },
+              {
+                col1: "VAT:",
+                col2: "20",
+                col3: "%",
+                style: {
+                  fontSize: 10,
+                },
+              },
+              {
+                col1: "SubTotal:",
+                col2: "116,199.90",
+                col3: "ALL",
+                style: {
+                  fontSize: 10,
+                },
+              },
+            ],
+            invDescLabel: "Invoice Note",
+            invDesc:
+              "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.",
+          },
+          footer: {
+            text: "The invoice is created on a computer and is valid without the signature and stamp.",
+          },
+          pageEnable: true,
+          pageLabel: "Page ",
+        };
+        function generatePDF() {
+          try {
+            var pdfObject = jsPDFInvoiceTemplate.default(props);
+            console.log("PDF Generated:", pdfObject);
+            alert("PDF Generated Successfully!");
+          } catch (error) {
+            console.error("Error generating PDF:", error);
+            alert("Error generating PDF. Check the console for details.");
+          }
+        }
+      </script>
+    </div>
+  </body>
+</html>

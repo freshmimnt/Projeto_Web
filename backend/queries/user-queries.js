@@ -1,8 +1,12 @@
 const getUsers = "SELECT * FROM users";
 const getUserById = "SELECT * FROM users WHERE id = $1";
-const addUser = "INSERT INTO users (name, phone, email, password, img, address) VALUES ($1, $2, $3, $4, $5, $6) ";
+const addUser = "INSERT INTO users (name, phone, email, password, location, address) VALUES ($1, $2, $3, $4, $5, $6) ";
 const checkEmailExists = "SELECT s FROM users s WHERE s.email = $1";
 const deleteUser = "DELETE FROM users WHERE id = $1";
+const updateUser = "UPDATE users SET name = $1, phone = $2, email = $3, password = $4, location = $5 address = $6 WHERE id = $7";
+const getAddress = "SELECT address from users where id = $1";
+const login = "SELECT * FROM users WHERE email = $1";
+
 
 module.exports = {
     getUsers,
@@ -10,4 +14,7 @@ module.exports = {
     addUser,
     checkEmailExists,
     deleteUser,
+    updateUser,
+    getAddress,
+    login,
 };

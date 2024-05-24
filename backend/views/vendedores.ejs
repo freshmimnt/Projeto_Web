@@ -18,31 +18,10 @@
     <link rel="stylesheet" href="/css/header.css" type="text/css" />
   </head>
   <body>
-    <header>
-      <div class="topnav">
-        <div class="logo"><a href="/landing-page.html">Farm2U</a></div>
-        <div class="topnav-center">
-          <input type="text" placeholder="Search.." />
-          <button type="submit"><i class="bx bx-search-alt-2"></i></button>
-        </div>
-        <div class="dropdown">
-          <button class="dropbtn">Categorias</button>
-          <div class="dropdown-content">
-            <a href="#">Agricultor</a>
-            <a href="#">Mercearia</a>
-            <a href="#">Talho</a>
-            <a href="#">Peixaria</a>
-          </div>
-        </div>
-        <div class="topnav-right">
-          <a href="/carrinho.html"><i class="bx bxs-shopping-bag"></i></a>
-          <a href="/login-usuario.html"><i class="bx bx-user"></i></a>
-        </div>
-      </div>
-    </header>
+    <%- include('partials/header') %>
     <div class="localizacao">
       <i class="bi bi-geo-alt"></i>
-      <h3 id="endereco"><%= endereco %></h3>
+      <h3 id="endereco"><%= address %></h3>
     </div>
     <div class="seller">
       <div class="title">
@@ -53,10 +32,7 @@
       </div>
     </div>
     <div id="map" style="height: 400px"></div>
-    <footer class="footer">
-      <p>Farm2U</p>
-    </footer>
-
+    <%- include('partials/footer') %>
     <script src="/js/landing-page.js"></script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG3RS9pD7sx5bCEbFyUV_Kax935iIN1g4&callback=initMap"

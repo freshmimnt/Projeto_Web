@@ -1,0 +1,43 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #3B5331; 
+    width: 100%; 
+    position: relative;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.head {
+    font-size: 24px; 
+    color: white;
+}
+
+
+.dias-semana {
+    list-style: none;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.container-ent-pick {
+    display: flex;
+}
+
+.container-ent-pick section {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.container-ent-pick .entregas,
+.container-ent-pick .pick-up {
+    text-align: center; 
+}
+
+.container-ent-pick .entregas h1,
+.container-ent-pick .pick-up h1 {
+    margin-bottom: 5px; 
+}
