@@ -5,9 +5,11 @@ const userRoutes = require('./backend/routes/user-routes')
 const sellerRoutes = require('./backend/routes/seller-routes')
 const sellercategoriesRoutes = require('./backend/routes/sellercategory-routes')
 const productRoutes = require('./backend/routes/product-routes')
+const productcategoriesRoutes = require('./backend/routes/productcategory-routes')
 const queries = require('./backend/queries/product-queries');
 const pool = require('./backend/models/database');
 const dotenv = require('dotenv')
+const multer = require('multer');
 dotenv.config()
 
 const app = express();
@@ -34,7 +36,7 @@ app.get('/', (req, res) => {
     res.render('landing-page');
 });
 app.get('/login', (req, res) => {
-    res.render('gerenciamento');
+    res.render('login');
 });
 app.get('/registo-comprador', (req, res) => {
     res.render('registo-comprador');
@@ -42,54 +44,40 @@ app.get('/registo-comprador', (req, res) => {
 app.get('/registo-vendedor', (req, res) => {
     res.render('registo-vendedor');
 });
-
-app.get('/geral', (req, res) => {
-    const sellerId = 1;
-    pool.query(queries.average, [sellerId], (error1, averageResult) => {
-        if (error1) {
-            throw error1;
-        }
-        const average = averageResult.rows[0].avg;
-        
-        pool.query(queries.std, [sellerId], (error2, stdResult) => {
-            if (error2) {
-                throw error2;
-            }
-            const std = stdResult.rows[0].stddev_samp;
-            
-            pool.query(queries.expensive, [sellerId], (error3, expensiveResult) => {
-                if (error3) {
-                    throw error3;
-                }
-                const expensive = expensiveResult.rows[0].max;
-                
-                pool.query(queries.cheapest, [sellerId], (error4, cheapestResult) => {
-                    if (error4) {
-                        throw error4;
-                    }
-                    const cheapest = cheapestResult.rows[0].min;
-                    
-                    const data = {
-                        average: average,
-                        std: std,
-                        expensive: expensive,
-                        cheapest: cheapest
-                    };
-                    res.render('visão-geral', data);
-                });
-            });
-        });
-    });
+app.get('/registo-vendedor2', (req, res) => {
+    res.render('registo-vendedor2');
 });
+app.get('/registo-vendedor3', (req, res) => {
+    res.render('registo-vendedor3');
+});
+app.get('/registo-vendedor-em-espera', (req, res) => {
+    res.render('registo-vendedor-em-espera');
+});
+
+app.get('/geral', async (req, res) => {
+    try {
+      const [averageResult, stdResult, expensiveResult, cheapestResult] = await Promise.all([
+        pool.query(queries.average, [sellerId]),
+        pool.query(queries.std, [sellerId]),
+        pool.query(queries.expensive, [sellerId]),
+        pool.query(queries.cheapest, [sellerId])
+      ]);
+  
+      const data = {
+        average: averageResult.rows[0].avg,
+        std: stdResult.rows[0].stddev_samp,
+        expensive: expensiveResult.rows[0].max,
+        cheapest: cheapestResult.rows[0].min
+      };
+  
+      res.render('visão-geral', data);
+    } catch (error) {
+      res.status(500).send("Internal Server Error");
+    }
+});
+  
 app.get('/vendedores', (req, res) => {
-    const id = 1;
-    pool.query(queries.getAddress, [id], (error, result) => {
-        if (error) {
-            throw error;
-        }
-        const address = result.rows[0].address;
-        res.render('vendedores', { address: address });
-    });
+      res.render('vendedores', { address: "Av. Dom Carlos I 4" });    
 });
 
 app.get('/produtos', (req, res) => {
@@ -109,9 +97,11 @@ app.use('/users', userRoutes);
 app.use('/sellers', sellerRoutes);
 app.use('/sellercategories', sellercategoriesRoutes);
 app.use('/products', productRoutes);
+app.use('/productcategories', productcategoriesRoutes);
 app.use(express.static('public'));
 
 
 app.listen(PORT, ()=>{
     console.log(`server running on port ${PORT}`);
 });
+

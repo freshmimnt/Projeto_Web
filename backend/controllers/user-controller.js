@@ -29,7 +29,7 @@ const getUserById = (req, res) => {
 }
 
 const addUser = (req, res) => {
-    const { name, phone, email, password, img, address } = req.body;
+    const { name, phone, email, password, address } = req.body;
     
     pool.query(queries.checkEmailExists, [email], async (error, results) => {
         if (error) {
@@ -87,7 +87,12 @@ const login = async (req, res) => {
                 res.status(401).send('Invalid email or password');
             } else {
                 req.session.userId = user.id;
-                res.redirect('/vendedores');
+                req.session.userRole = user.role;
+                if (user.role === 'seller') {
+                    res.redirect('/geral');  // Redirect sellers to /geral
+                  } else {
+                    res.redirect('/vendedores'); // Redirect buyers to /vendedores
+                  }
             }
         }
     } catch (error) {
@@ -168,7 +173,37 @@ const updateUser = (req, res) => {
     });
 };
 
-    
+const getAddress = (req, res) => {
+    const id = parseInt(req.params.id)
+    pool.query(queries.getAddress, [id], (error, results) => {
+        if (error) {
+            throw error
+        }
+        if (results.rows.length === 0) {
+            res.status(404).send('User not found')
+        } else {
+            res.status(200).json(results.rows)
+        }
+    })
+}
+
+const image = (req, res) => {
+    const id = parseInt(req.params.id)
+    const image = req.body.img;
+    pool.query(queries.image, [image, id], (error, results) => {
+        if (error) {
+            throw error
+        }
+        if (results.rows.length === 0) {
+            res.status(404).send('User not found')
+        } else {
+            res.status(200).send(`Image added`)
+        }
+    })
+}
+
+
+
 module.exports = {
     getUsers,
     getUserById,
@@ -176,4 +211,6 @@ module.exports = {
     deleteUser,
     updateUser, 
     login,
+    getAddress,
+    image,
 };
