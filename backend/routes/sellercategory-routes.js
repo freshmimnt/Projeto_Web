@@ -3,6 +3,6 @@ const sellerCategoriesController = require('../controllers/sellercategory-contro
 
 const router = Router();
 
-router.get('/', sellerCategoriesController.getSellerCategories);
+router.get('/all', sellerCategoriesController.getSellerCategories);
 
 module.exports = router;

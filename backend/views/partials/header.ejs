@@ -19,12 +19,7 @@
         </div>
         <div class="dropdown">
           <button class="dropbtn">Categorias</button>
-          <div class="dropdown-content">
-            <a href="#">Agricultor</a>
-            <a href="#">Mercearia</a>
-            <a href="#">Talho</a>
-            <a href="#">Peixaria</a>
-          </div>
+          <div class="dropdown-content" id="categoryDropdown"></div>
         </div>
         <div class="topnav-right">
           <a href="/carrinho.html"><i class="bx bxs-shopping-bag"></i></a>
@@ -32,5 +27,18 @@
         </div>
       </div>
     </header>
+    <script>
+      fetch("/sellercategories/all")
+        .then((response) => response.json())
+        .then((categories) => {
+          const dropdown = document.getElementById("categoryDropdown");
+          categories.forEach((category) => {
+            const link = document.createElement("a");
+            link.href = `/sellers?category=${category.id}`;
+            link.textContent = category.name;
+            dropdown.appendChild(link);
+          });
+        });
+    </script>
   </body>
 </html>

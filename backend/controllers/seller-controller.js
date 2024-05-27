@@ -10,10 +10,17 @@ const getSellers = (req, res) => {
     })
 }
 
+const getLocation = (req, res) => {
+    pool.query(queries.getLocation, (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.json(results.rows); 
+    });
+  };
+  
+
 module.exports = {
     getSellers,
+    getLocation,    
 }
-
-
-
-

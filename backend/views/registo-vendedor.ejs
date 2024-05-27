@@ -17,7 +17,7 @@
     <h1 class="seller-h1">Alcance novos clientes com Farm2U!</h1>
     <br />
     <div class="wrapper">
-      <form action="/sellers/addAcount" method="POST">
+      <form action="/users" method="POST">
         <h2>
           Registrar-se na Farm2U nunca foi tão fácil. Torna-se um parceiro agora
           mesmo!
@@ -34,10 +34,7 @@
           <input type="password" placeholder="Palavra-Passe" required />
           <i class="bx bxs-lock-alt"></i>
         </div>
-        <form action="/registo-vendedor2">
-          <button type="submit" class="btn">Criar Conta</button>
-        </form>
-
+        <button type="submit" class="btn">Criar Conta</button>
         <div class="register">
           <p>Já tem conta? <a href="iniciar-sessao.html">Iniciar Sessão</a></p>
         </div>
@@ -132,6 +129,14 @@
         </div>
       </div>
     </section>
-    <script src="app.js"></script>
+    <script>
+      const faqs = document.querySelectorAll(".pf");
+
+      faqs.forEach((pf) => {
+        pf.addEventListener("click", () => {
+          pf.classList.toggle("active");
+        });
+      });
+    </script>
   </body>
 </html>

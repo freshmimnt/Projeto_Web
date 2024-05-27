@@ -6,7 +6,9 @@ const sellerRoutes = require('./backend/routes/seller-routes')
 const sellercategoriesRoutes = require('./backend/routes/sellercategory-routes')
 const productRoutes = require('./backend/routes/product-routes')
 const productcategoriesRoutes = require('./backend/routes/productcategory-routes')
-const queries = require('./backend/queries/product-queries');
+const productQueries = require('./backend/queries/product-queries');
+const sellerQueries = require('./backend/queries/seller-queries');
+const userQueries = require('./backend/queries/user-queries');
 const pool = require('./backend/models/database');
 const dotenv = require('dotenv')
 const multer = require('multer');
@@ -51,16 +53,17 @@ app.get('/registo-vendedor3', (req, res) => {
     res.render('registo-vendedor3');
 });
 app.get('/registo-vendedor-em-espera', (req, res) => {
-    res.render('registo-vendedor-em-espera');
+    res.render('registro-em-espera');
 });
 
 app.get('/geral', async (req, res) => {
+    const sellerId = 1;
     try {
       const [averageResult, stdResult, expensiveResult, cheapestResult] = await Promise.all([
-        pool.query(queries.average, [sellerId]),
-        pool.query(queries.std, [sellerId]),
-        pool.query(queries.expensive, [sellerId]),
-        pool.query(queries.cheapest, [sellerId])
+        pool.query(productQueries.average, [sellerId]),
+        pool.query(productQueries.std, [sellerId]),
+        pool.query(productQueries.expensive, [sellerId]),
+        pool.query(productQueries.cheapest, [sellerId])
       ]);
   
       const data = {
@@ -76,13 +79,31 @@ app.get('/geral', async (req, res) => {
     }
 });
   
-app.get('/vendedores', (req, res) => {
-      res.render('vendedores', { address: "Av. Dom Carlos I 4" });    
-});
+
+app.get('/vendedores', async (req, res) => {
+    const userId = 15; 
+    try {
+      const addressResult = await pool.query(userQueries.getAddress, [userId]); 
+      const address = addressResult.rows.length > 0 ? addressResult.rows[0].address : null;
+  
+      const sellerResult = await pool.query(sellerQueries.getSellers); 
+      
+      const data = {
+        address,
+        sellers: sellerResult.rows
+      };
+      
+      res.render('vendedores', data);
+    } catch (error) {
+      console.error("Error fetching seller data:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+  
 
 app.get('/produtos', (req, res) => {
     const sellerId = 1;   
-    pool.query(queries.getProducts, [sellerId], (error, results) => {
+    pool.query(productQueries.getProducts, [sellerId], (error, results) => {
         if (error) {
             throw error;
         }
@@ -91,6 +112,9 @@ app.get('/produtos', (req, res) => {
 });
 app.get('/gerenciamento', (req, res) => {
     res.render('gerenciamento');
+});
+app.get('/perfil', (req, res) => {
+    res.render('perfil');
 });
 
 app.use('/users', userRoutes);

@@ -1,5 +1,7 @@
-const getSellers = "SELECT u.name AS seller, s.store_name AS store, sc.name AS category, p.name AS product, p.price FROM sellers s JOIN users u ON s.users_id = u.id JOIN seller_categories sc ON s.seller_category_id = sc.id JOIN products p ON p.seller_id = s.id";
+const getSellers = "SELECT s.store_name AS store_name, sc.name AS store_category FROM sellers s JOIN seller_categories sc ON s.seller_category_id = sc.id ";
+const getLocation = "SELECT ST_X(u.location::geometry) as lng, ST_Y(u.location::geometry) as lat, s.store_name FROM users u JOIN sellers s ON u.id = s.users_id;";
 
 module.exports = {
     getSellers,
+    getLocation,
 };
