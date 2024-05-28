@@ -9,6 +9,8 @@ const login = "SELECT * FROM users WHERE email = $1";
 const image = "Insert into users (img) VALUES ($1) where id = $2";
 
 
+
+
 module.exports = {
     getUsers,
     getUserById,

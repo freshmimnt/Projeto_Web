@@ -34,11 +34,37 @@ app.use(session({
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } 
 }));
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/uploads/seller_images');  
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname); 
+  }
+});
+const upload = multer({ storage: storage });
+
+app.post('/sellers/:id/upload-image', upload.single('sellerImage'), async (req, res) => {
+  const sellerId = req.params.id;
+  const imagePath = `/uploads/seller_images/${req.file.filename}`; 
+  try {
+    await pool.query(sellerQueries.updateSellerImage, [imagePath, sellerId]);
+    res.redirect('/sellers'); 
+  } catch (error) {
+    console.error("Error updating seller image:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 app.get('/', (req, res) => {
     res.render('landing-page');
 });
 app.get('/login', (req, res) => {
     res.render('login');
+});
+app.get('/logout', (req, res) => {
+  req.session.destroy(); 
+  res.redirect('/login'); 
 });
 app.get('/registo-comprador', (req, res) => {
     res.render('registo-comprador');
@@ -78,9 +104,7 @@ app.get('/geral', async (req, res) => {
       res.status(500).send("Internal Server Error");
     }
 });
-  
-
-app.get('/vendedores', async (req, res) => {
+app.get('/sellers', async (req, res) => {
     const userId = 15; 
     try {
       const addressResult = await pool.query(userQueries.getAddress, [userId]); 
@@ -98,9 +122,7 @@ app.get('/vendedores', async (req, res) => {
       console.error("Error fetching seller data:", error);
       res.status(500).send("Internal Server Error");
     }
-  });
-  
-
+});
 app.get('/produtos', (req, res) => {
     const sellerId = 1;   
     pool.query(productQueries.getProducts, [sellerId], (error, results) => {

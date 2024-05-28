@@ -2,9 +2,6 @@
     width: 200px;
     height: 150px;
     border-radius: 10%;
-    
-
-    
 }
 
 .comentario img {
@@ -21,3 +18,15 @@
     margin-left: 10px;
     border-radius: 10%;
 }
+
+/* General Image Styling */
+.seller-card img {
+    width: 150px;      /* Set the desired width */
+    height: 150px;     /* Set the desired height (same as width for a square) */
+    object-fit: cover;  /* Crop/scale image to fill container while maintaining aspect ratio */
+    display: block;     /* Prevent extra space below the image */
+    margin: 0 auto;     /* Center the image horizontally */
+  }
+  
+  /* Other styles (circle, rounded, shadow) can remain the same */
+  
