@@ -74,11 +74,6 @@
             <h3>Média dos preços: <%= average %></h3>
           </div>
         </div>
-        <div style="background-color: #e09135" class="box-info-single">
-          <div class="info-text">
-            <h3>Desvio padrão dos preços: <%= std %></h3>
-          </div>
-        </div>
         <div style="background-color: #548149" class="box-info-single">
           <div class="info-text">
             <h3>Produto mais caro: <%= expensive %></h3>
@@ -91,110 +86,38 @@
         </div>
       </div>
       <div class="grafico">
-        <canvas id="grafico1" style="width: 900px; height: 500px"></canvas>
         <canvas id="grafico2" style="width: 900px; height: 500px"></canvas>
       </div>
-      <script>
-        const ctx1 = document.getElementById("grafico1");
-        const ctx2 = document.getElementById("grafico2");
-
-        let labelsX = [
-          "Janeiro",
-          "Fevereiro",
-          "Março",
-          "Abril",
-          "Maio",
-          "Junho",
-          "Julho",
-          "Agosto",
-          "Setembro",
-          "Outubro",
-          "Novembro",
-          "Dezembro",
-        ];
-        let valores = [4, 5, 2, 9, 11, 6, 8, 8, 3, 15, 10, 7];
-
-        new Chart(ctx1, {
-          type: "bar",
-          data: {
-            labels: labelsX,
-            datasets: [
-              {
-                label: "Vendas Mensais",
-                data: valores,
-                backgroundColor: [
-                  "rgba(255, 99, 132, 0.2)",
-                  "rgba(54, 162, 235, 0.2)",
-                  "rgba(255, 206, 86, 0.2)",
-                  "rgba(75, 192, 192, 0.2)",
-                  "rgba(153, 102, 255, 0.2)",
-                ],
-                borderColor: [
-                  "rgba(255, 99, 132, 1)",
-                  "rgba(54, 162, 235, 1)",
-                  "rgba(255, 206, 86, 1)",
-                  "rgba(75, 192, 192, 1)",
-                  "rgba(153, 102, 255, 1)",
-                  "rgba(255, 159, 64, 1)",
-                  "rgba(255, 99, 132, 1)",
-                  "rgba(54, 162, 235, 1)",
-                  "rgba(255, 206, 86, 1)",
-                  "rgba(75, 192, 192, 1)",
-                  "rgba(153, 102, 255, 1)",
-                  "rgba(255, 159, 64, 1)",
-                ],
-                borderWidth: 1,
-              },
-            ],
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true,
-              },
-            },
-          },
-        });
-        const dataDonut = {
-          labels: ["Produto A", "Produto B", "Produto C", "Produto D"],
-          datasets: [
-            {
-              label: "Distribuição de Vendas",
-              data: [30, 20, 25, 25],
-              backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(255, 206, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-              ],
-              borderColor: [
-                "rgba(255, 99, 132, 1)",
-                "rgba(54, 162, 235, 1)",
-                "rgba(255, 206, 86, 1)",
-                "rgba(75, 192, 192, 1)",
-              ],
-              borderWidth: 1,
-            },
-          ],
-        };
-
-        new Chart(ctx2, {
-          type: "doughnut",
-          data: dataDonut,
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                position: "top",
-              },
-              title: {
-                display: true,
-                text: "Distribuição de Vendas por Produto",
-              },
-            },
-          },
-        });
-      </script>
     </div>
+    <script>
+      const sellerId = 1;
+      fetch(`/sellers/productDistribution/${sellerId}`)
+        .then((response) => response.json())
+        .then((chartData) => {
+          const ctx2 = document.getElementById("grafico2").getContext("2d");
+          if (window.myDoughnutChart) {
+            window.myDoughnutChart.destroy();
+          }
+          window.myDoughnutChart = new Chart(ctx2, {
+            type: "doughnut",
+            data: chartData,
+            options: {
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "top",
+                },
+                title: {
+                  display: true,
+                  text: "Distribuição de Produtos por Categoria",
+                },
+              },
+            },
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching chart data:", error);
+        });
+    </script>
   </body>
 </html>

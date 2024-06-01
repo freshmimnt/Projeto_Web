@@ -10,55 +10,37 @@ CREATE TABLE product_categories (
     name TEXT
 );
 
--- Create table state
-CREATE TABLE states (
-    id SERIAL PRIMARY KEY,
-    name TEXT
-);
-
--- Create table delivery type
-CREATE TABLE delivery_types (
-    id SERIAL PRIMARY KEY,
-    name TEXT
-);
-
--- Create table week_days
-CREATE TABLE week_days (
-    id SERIAL PRIMARY KEY,
-    name TEXT
-);
-
 -- Create table user
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
-    phone TEXT NOT NULL,
+    phone TEXT,
     email TEXT NOT NULL,
     password TEXT NOT NULL,
     img TEXT,
     location geography(Point, 4326),
-    address text
+    address text,
+	role TEXT NOT NULL DEFAULT 'buyer'
 );
 
--- Table: sellers
+-- Create table sellers
 CREATE TABLE sellers (
     id SERIAL PRIMARY KEY,
     iban TEXT NOT NULL,
-    delivery_radius INT NOT NULL,
     store_name TEXT NOT NULL,
-    opening_time TIME NOT NULL,
-    closing_time TIME NOT NULL,
+	delivery_radius INT NOT NULL,
+	img text,
     users_id INT REFERENCES users(id) ON DELETE CASCADE,
     seller_category_id INT REFERENCES seller_categories(id) ON DELETE CASCADE
 );
 
--- Table: seller_working_days
+-- Create table seller_working_days
 CREATE TABLE seller_working_days (
     id SERIAL PRIMARY KEY,
-    start_time TIME NOT NULL,
-    end_time TIME NOT NULL,
     seller_id INT REFERENCES sellers(id) ON DELETE CASCADE,
-    week_day_id INT REFERENCES week_days(id) ON DELETE CASCADE
+    day_of_week INT NOT NULL CHECK (day_of_week >= 0 AND day_of_week <= 6),
+    opening_time TIME,
+    closing_time TIME
 );
 
 -- Create table product
@@ -67,6 +49,7 @@ CREATE TABLE products (
     name text NOT NULL,
     price float NOT NULL,
 	product_stock int not null,
+	img text,
     product_category_id INT REFERENCES product_categories(id) ON DELETE CASCADE,
     seller_id INT REFERENCES sellers(id) ON DELETE CASCADE
 );
@@ -82,16 +65,14 @@ CREATE TABLE reviews (
 
 -- Create table order
 CREATE TABLE orders (
-	id SERIAL PRIMARY KEY,
-	delivery_time TIME NOT NULL,
-	delivery_date DATE NOT NULL,
-	received_time TIME NOT NULL,
-	received_date DATE NOT NULL,
-	note text,
+    id SERIAL PRIMARY KEY,
+    delivery_time TIME NOT NULL,
+    delivery_date DATE NOT NULL,
+    note text,
+    state text DEFAULT 'não entregue',
+    delivery_type_id text,
     users_id INT REFERENCES users(id) ON DELETE CASCADE,
-    product_id INT REFERENCES products(id) ON DELETE CASCADE,
-    states_id INT REFERENCES states(id) ON DELETE CASCADE,
-    delivery_type_id INT REFERENCES delivery_types(id) ON DELETE CASCADE
+    product_id int[] NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS "session" (
@@ -103,9 +84,8 @@ WITH (OIDS=FALSE);
 
 ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
-
 --Values seller category
-INSERT INTO seller_categories(name)
+INSERT INTO seller_categories (name)
 VALUES ('Agricultor');
 INSERT INTO seller_categories (name)
 VALUES ('Mercearia');
@@ -116,75 +96,88 @@ VALUES ('Peixaria');
 
 --Values product category
 INSERT INTO product_categories (name)
-VALUES ('Fruta');
+VALUES ('Futa');
 INSERT INTO product_categories (name)
 VALUES ('Legumes');
-
---Values state
-INSERT INTO states (name)
-VALUES ('Não entregue');
-INSERT INTO states (name)
-VALUES ('Entregue');
-
---Values delivery type
-INSERT INTO delivery_types (name)
-VALUES ('Pick-up');
-INSERT INTO delivery_types (name)
-VALUES ('Entrega ao domicílio');
-
---Values week days
-INSERT INTO week_days (name) VALUES ('Domingo');
-INSERT INTO week_days (name) VALUES ('Segunda-Feira');
-INSERT INTO week_days (name) VALUES ('Terça-Feira');
-INSERT INTO week_days (name) VALUES ('Quarta-Feira');
-INSERT INTO week_days (name) VALUES ('Quinta-Feira');
-INSERT INTO week_days (name) VALUES ('Sexta-Feira');
-INSERT INTO week_days (name) VALUES ('Sábado');
+INSERT INTO product_categories (name)
+VALUES ('Carne');
+INSERT INTO product_categories (name)
+VALUES ('Bio');
+INSERT INTO product_categories (name)
+VALUES ('Conservas');
+INSERT INTO product_categories (name)
+VALUES ('Cabaz');
+INSERT INTO product_categories (name)
+VALUES ('Carne');
+INSERT INTO product_categories (name)
+VALUES ('Peixe');
+INSERT INTO product_categories (name)
+VALUES ('Vegan');
+INSERT INTO product_categories (name)
+VALUES ('Charcutaria');
+INSERT INTO product_categories (name)
+VALUES ('Laticínios');
+INSERT INTO product_categories (name)
+VALUES ('Congelados');
+INSERT INTO product_categories (name)
+VALUES ('Bebidas Alcoólicas');
+INSERT INTO product_categories (name)
+VALUES ('Água');
+INSERT INTO product_categories (name)
+VALUES ('Sumos e Refrigerantes');
 
 --Value user
 INSERT INTO users (name, phone, email, password, img, location, address)
 VALUES ('João Alberto', '999999999', 'exemplo@gmail.com', 'password', 'imagemaleatoria.jpg', ST_GeographyFromText('SRID=4326;POINT(-9.14426 38.725427)'),'Rua Luciano Cordeiro 58, 1150-216 Lisbon, Portugal');
-INSERT INTO users (name, phone, email, password, img, location, address)
-VALUES ('Maria Helena', '988988988', 'helena@gmail.com', 'helna1234', 'helena.png', ST_GeomFromText('SRID=4326;POINT(-9.141427566357997 38.70844649701235)'), 'Rua Serpa Pinto 5E, 1200-442 Lisboa');
-INSERT INTO users (name, phone, email, password, img, location, address)
-VALUES ('Luís Fidalgo', '976123098', 'filfil@gmail.com', 'filamento010', 'filamento.jpg', ST_GeomFromText('SRID=4326;POINT(-9.147868891540814 38.74134554455972)'), 'Avenida de Berna 6, 1050-040 Lisboa');
+INSERT INTO users (name, phone, email, password, img, location, address, role)
+VALUES ('Maria Helena', '988988988', 'helena@gmail.com', 'helna1234', '', ST_GeomFromText('SRID=4326;POINT(-9.141427566357997 38.70844649701235)'), 'Rua Serpa Pinto 5E, 1200-442 Lisboa', 'seller');
+INSERT INTO users (name, phone, email, password, img, location, address, role)
+VALUES ('Luís Fidalgo', '976123098', 'filfil@gmail.com', 'filamento010', '', ST_GeomFromText('SRID=4326;POINT(-9.147868891540814 38.74134554455972)'), 'Avenida de Berna 6, 1050-040 Lisboa', 'seller');
 INSERT INTO users (name, phone, email, password, img, location, address)
 VALUES ('Ana Frederica', '901842700', 'anafefe@gmail.com', 'anafede123', 'imagem.jpeg', ST_GeomFromText('SRID=4326;POINT(-9.114450240930786 38.782189956772584)'), 'Rua Pedro Alvares Cabral 84, 2685-228 Moscavide');
 
 -- Insert values for sellers
-INSERT INTO sellers (iban, delivery_radius, store_name, opening_time, closing_time, users_id, seller_category_id)
-VALUES ('PT50 0002 0123 1234 9567 2145 4', 50, 'Mercearia Fidalgo', '08:00', '18:00', 3, 2);
-INSERT INTO sellers (iban, delivery_radius, store_name, opening_time, closing_time, users_id, seller_category_id)
-VALUES ('PT50 0002 0123 1234 5678 9015 4', 20, 'Agricultora Helena', '10:00', '20:00', 2, 1);
+INSERT INTO sellers (iban, store_name, delivery_radius, img, users_id, seller_category_id)
+VALUES ('PT50 0002 0123 1234 5678 9015 4', 'Agricultora Helena', 15, '/uploads/seller_images/quinta.png', 2, 1);
+INSERT INTO sellers (iban, store_name, delivery_radius,  img, users_id, seller_category_id)
+VALUES ('PT50 0002 0123 1234 9567 2145 4', 25,'Mercearia Fidalgo', '/uploads/seller_images/mercearia.jpg', 3, 2);
 
--- Insert values for seller working days
-INSERT INTO seller_working_days (start_time, end_time, seller_id, week_day_id)
-VALUES ('09:00', '17:00', 1, 2);
-INSERT INTO seller_working_days (start_time, end_time, seller_id, week_day_id)
-VALUES ('09:00', '17:00', 1, 3);
-INSERT INTO seller_working_days (start_time, end_time, seller_id, week_day_id)
-VALUES ('09:00', '17:00', 1, 4);
-INSERT INTO seller_working_days (start_time, end_time, seller_id, week_day_id)
-VALUES ('08:00', '15:00', 1, 5);
-INSERT INTO seller_working_days (start_time, end_time, seller_id, week_day_id)
-VALUES ('11:00', '20:00', 2, 3);
-INSERT INTO seller_working_days (start_time, end_time, seller_id, week_day_id)
-VALUES ('10:00', '17:00', 2, 4);
-INSERT INTO seller_working_days (start_time, end_time, seller_id, week_day_id)
-VALUES ('09:00', '20:00', 2, 5);
+INSERT INTO seller_working_days (seller_id, day_of_week, opening_time, closing_time)
+VALUES
+    (1, 1, '09:00:00', '13:00:00'),  -- Agricultora Helena, Monday (opens 9 AM, closes 1 PM)
+    (1, 2, '15:00:00', '18:00:00'),  -- Agricultora Helena, Tuesday (opens 3 PM, closes 6 PM)
+    (1, 3, '09:00:00', '13:00:00'),  -- Agricultora Helena, Wednesday
+    (1, 4, '15:00:00', '18:00:00'),  -- Agricultora Helena, Thursday
+    (1, 5, '09:00:00', '13:00:00'),  -- Agricultora Helena, Friday
+    (2, 1, '08:00:00', '13:00:00'),  -- Mercearia Fidalgo, Monday
+    (2, 2, '15:00:00', '19:00:00'),  -- Mercearia Fidalgo, Tuesday
+    (2, 3, '08:00:00', '13:00:00'),  -- Mercearia Fidalgo, Wednesday
+    (2, 4, '15:00:00', '19:00:00'),  -- Mercearia Fidalgo, Thursday
+    (2, 5, '08:00:00', '13:00:00');  -- Mercearia Fidalgo, Friday
 
 --Value product
-INSERT INTO products (name, price, product_stock, product_category_id, seller_id)
-VALUES ('Maça de Alcobaça kg', '1.60',  1, 1);
-INSERT INTO products (name, price, product_stock, product_category_id, seller_id)
-VALUES ('Pera Rocha unidade', '0.50',  1, 2);
-INSERT INTO products (name, price, product_stock, product_category_id, seller_id)
-VALUES ('Couve Flor kg', '2',  2, 1);
-INSERT INTO products (name, price, product_stock, product_category_id, seller_id)
-VALUES ('Cenoura unidade', '0.55',  2, 2);
+INSERT INTO products (name, price, product_stock, img, product_category_id, seller_id)
+VALUES ('Maça de Alcobaça kg', '1.60',  34, '/uploads/product_images/apple.jpg', 1, 1);
 
 --Value review
-INSERT INTO products (rating, comment, users_id, seller_id)
-VALUES (4, '',  1, 2);
-INSERT INTO products (rating, comment, users_id, seller_id)
+INSERT INTO reviews (rating, comment, users_id, seller_id)
 VALUES (2, 'Produtos de péssima qualidade',  4, 1);
+
+--Value orders
+INSERT INTO orders (delivery_time, delivery_date, note, delivery_type_id, users_id, product_id)
+VALUES
+  -- Orders for Agricultora Helena
+  ('10:30:00', '2024-06-03', 'Deixar na portaria', 'Entrega ao Domicilio', 1, '{1,2}'),
+  ('14:00:00', '2024-06-05', NULL, 'Entrega ao Domicilio', 4, '{3}'),
+
+  -- Orders for Mercearia Fidalgo
+  ('16:45:00', '2024-06-01', 'Tocar a campainha duas vezes', 'Entrega ao Domicilio', 1, '{4}'),
+  ('11:00:00', '2024-06-07', 'Entregar ao vizinho', 'Pick-Up', 4, '{5, 6}');
+     
+
+
+
+
+
+
+

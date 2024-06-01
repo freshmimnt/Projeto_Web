@@ -1,6 +1,7 @@
 body, html {
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
 }
 
 header {
@@ -12,32 +13,97 @@ header {
 }
 
 .head {
-    font-size: 24px; 
+    font-size: 35px; 
     color: white;
 }
 
-
-.dias-semana {
-    list-style: none;
-    padding: 0;
-    flex-wrap: wrap;
+.container {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: flex-start;
+   align-items: flex-start;
+   padding-bottom: 50px;
 }
 
-.container-ent-pick {
-    display: flex;
+.lista-vendedor {
+    width: 50%;
+    margin-top: 20px;
 }
 
-.container-ent-pick section {
-    flex: 1;
-    margin-right: 20px;
+.lista-vendedor label {
+    width: 50%;
+    margin-left: 20px;
+    margin-top: 50px;
 }
 
-.container-ent-pick .entregas,
-.container-ent-pick .pick-up {
-    text-align: center; 
+.lista-vendedor input, select {
+    width: 500px;
+    height: 30px;
+    margin-left: 20px;
+    border-radius: 5px;
 }
 
-.container-ent-pick .entregas h1,
-.container-ent-pick .pick-up h1 {
-    margin-bottom: 5px; 
+.horario {
+    width: 100%;
+    margin-left: 20px;
+    margin-top: 50px;
+}
+
+.horario label {
+    font-size: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.upload {
+    width: 50%;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+.upload label {
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.upload input {
+    width: 500px;
+    height: 30px;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+
+.button {
+    margin-left: 20px;
+    margin-top: 20px;
+    padding: 20px 40px;
+    font-size: 30px;
+    background-color: #3B5331;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #2A3A21;
+}
+
+.dias-semana input[type="time"] {
+    border: 2px solid #3B5331;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px 0;
+    width: 120px;
+    height: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    color: #3B5331;
+    background-color: #f0f0f0;
+}
+
+.dias-semana input[type="time"]:focus {
+    outline: none;
+    border-color: #2A3A21;
+    box-shadow: 0 0 5px rgba(42, 58, 33, 0.5);
 }

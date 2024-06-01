@@ -17,26 +17,44 @@
     <h1 class="seller-h1">Alcance novos clientes com Farm2U!</h1>
     <br />
     <div class="wrapper">
-      <form action="/users" method="POST">
+      <form action="/users/addSeller" method="POST">
         <h2>
           Registrar-se na Farm2U nunca foi tão fácil. Torna-se um parceiro agora
           mesmo!
         </h2>
         <div class="input-box">
-          <input type="text" placeholder="Nome" required />
+          <input type="text" name="name" placeholder="Nome" required />
           <i class="bx bxs-user"></i>
         </div>
         <div class="input-box">
-          <input type="text" placeholder="Email" required />
+          <input type="text" name="email" placeholder="Email" required />
           <i class="bx bxs-envelope"></i>
         </div>
         <div class="input-box">
           <input type="password" placeholder="Palavra-Passe" required />
           <i class="bx bxs-lock-alt"></i>
         </div>
-        <button type="submit" class="btn">Criar Conta</button>
+        <div class="input-box">
+          <input
+            type="text"
+            name="address"
+            placeholder="Morada da Loja"
+            required
+          />
+          <i class="bx bxs-location-plus"></i>
+        </div>
+        <div class="input-box">
+          <input
+            type="number"
+            name="phone"
+            placeholder="Número de Telemovel"
+            required
+          />
+          <i class="bx bxs-phone"></i>
+        </div>
+        <button type="submit" class="btn">Continuar</button>
         <div class="register">
-          <p>Já tem conta? <a href="iniciar-sessao.html">Iniciar Sessão</a></p>
+          <p>Já tem conta? <a href="/login">Iniciar Sessão</a></p>
         </div>
       </form>
     </div>
@@ -55,12 +73,17 @@
               stroke-linecap="round"
             ></path>
           </svg>
-          <div class="answer"><p>PIPIPIPIPOIPIPIPIPIPIPIPIPIP</p></div>
+          <div class="answer">
+            <p>
+              Foto do Estabelecimento, foto do documento de Identificação, foto
+              do Comprovativo de IBAN e uma foto da licença comercial
+            </p>
+          </div>
         </div>
       </div>
       <div class="pf">
         <div class="question">
-          <h3>Quais formas de entregas?</h3>
+          <h3>Como fazer chegar o meu produto ao meu cliente?</h3>
           <svg width="15" height="10" viewBox="0 0 42 25">
             <path
               d="M3 3L21 21L39 3"
@@ -69,7 +92,12 @@
               stroke-linecap="round"
             ></path>
           </svg>
-          <div class="answer"><p>PIPIPIPIPOIPIPIPIPIPIPIPIPIP</p></div>
+          <div class="answer">
+            <p>
+              Para fazer o seu produto chegar ao cliente tem 2 opções
+              <strong>obrigatorias:</strong> Pick Up e Entrega ao Domicilio
+            </p>
+          </div>
         </div>
       </div>
       <div class="pf">
@@ -83,35 +111,9 @@
               stroke-linecap="round"
             ></path>
           </svg>
-          <div class="answer"><p>PIPIPIPIPOIPIPIPIPIPIPIPIPIP</p></div>
-        </div>
-      </div>
-      <div class="pf">
-        <div class="question">
-          <h3>Como se recebe um novo pedido?</h3>
-          <svg width="15" height="10" viewBox="0 0 42 25">
-            <path
-              d="M3 3L21 21L39 3"
-              stroke="white"
-              stroke-width="7"
-              stroke-linecap="round"
-            ></path>
-          </svg>
-          <div class="answer"><p>PIPIPIPIPOIPIPIPIPIPIPIPIPIP</p></div>
-        </div>
-      </div>
-      <div class="pf">
-        <div class="question">
-          <h3>Como usar a plataforma de forma fácil?</h3>
-          <svg width="15" height="10" viewBox="0 0 42 25">
-            <path
-              d="M3 3L21 21L39 3"
-              stroke="white"
-              stroke-width="7"
-              stroke-linecap="round"
-            ></path>
-          </svg>
-          <div class="answer"><p>PIPIPIPIPOIPIPIPIPIPIPIPIPIP</p></div>
+          <div class="answer">
+            <p>A verificação da sua conta deve demorar no máximo 48 horas</p>
+          </div>
         </div>
       </div>
       <div class="pf">
@@ -125,13 +127,12 @@
               stroke-linecap="round"
             ></path>
           </svg>
-          <div class="answer"><p>PIPIPIPIPOIPIPIPIPIPIPIPIPIP</p></div>
+          <div class="answer"><p>A Farm2U tem uma taxa de 5% por cada pedido.</p></div>
         </div>
       </div>
     </section>
     <script>
       const faqs = document.querySelectorAll(".pf");
-
       faqs.forEach((pf) => {
         pf.addEventListener("click", () => {
           pf.classList.toggle("active");

@@ -85,20 +85,17 @@ app.get('/registo-vendedor-em-espera', (req, res) => {
 app.get('/geral', async (req, res) => {
     const sellerId = 1;
     try {
-      const [averageResult, stdResult, expensiveResult, cheapestResult] = await Promise.all([
+      const [averageResult, expensiveResult, cheapestResult] = await Promise.all([
         pool.query(productQueries.average, [sellerId]),
-        pool.query(productQueries.std, [sellerId]),
         pool.query(productQueries.expensive, [sellerId]),
         pool.query(productQueries.cheapest, [sellerId])
       ]);
   
       const data = {
         average: averageResult.rows[0].avg,
-        std: stdResult.rows[0].stddev_samp,
         expensive: expensiveResult.rows[0].max,
         cheapest: cheapestResult.rows[0].min
       };
-  
       res.render('visão-geral', data);
     } catch (error) {
       res.status(500).send("Internal Server Error");
@@ -137,6 +134,9 @@ app.get('/gerenciamento', (req, res) => {
 });
 app.get('/perfil', (req, res) => {
     res.render('perfil');
+});
+app.get('/loja', (req, res) => {
+  res.render('loja');
 });
 
 app.use('/users', userRoutes);

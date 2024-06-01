@@ -31,7 +31,7 @@ header {
     padding: 30px 40px;
     border: 2px solid black;
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    margin-right: 50%; /* Adjust this value as needed */
+    margin-right: 50%; 
 }
 
 .wrapper h1{
@@ -94,15 +94,24 @@ header {
 }
 
 .wrapper .btn {
-    width: 200px; 
-    height: 50px; 
-    background: #58744B; 
-    border-radius: 10px; 
-    display: block; 
-    margin: auto;
-    text-align: center;
-    line-height: 50px;
+    width: 150px;
+    height: 40px;
+    background-color: #58744B;            
+    border: none;            
+    border-radius: 10px;     
+    display: flex;             
+    justify-content: center;   
+    align-items: center;         
+    margin: 20px auto;       
+    text-align: center;            
+    cursor: pointer;            
+    transition: background-color 0.3s ease; 
 }
+
+.wrapper .btn:hover {
+    background-color: #455a3a; 
+}
+
 
 .wrapper .register{
     text-align: center;
@@ -185,19 +194,19 @@ section {
     width: 600px;
     height: 50px;
     color: black;
-    font-size: 16px; /* Adjust font size as needed */
+    font-size: 16px; 
     font-family: Lucida Sans;
     font-weight: 600;
     background-color: #58744B;
-    border: 2px solid black; /* Add border to resemble a button */
-    border-radius: 5px; /* Adjust border radius as needed */
-    cursor: pointer; /* Add cursor style to indicate interactivity */
-    transition: background-color 0.3s, color 0.3s; /* Add transition for smoother hover effect */
+    border: 2px solid black; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s; 
 }
 
 .button:hover {
-    background-color: black; /* Change background color on hover */
-    color: white; /* Change text color on hover */
+    background-color: black; 
+    color: white; 
 }
 
 .terms-container {
@@ -234,7 +243,6 @@ section {
     list-style: none;
 }
 
-/* Main styles */
 main {
     padding: 20px;
   }
@@ -287,7 +295,7 @@ main {
     background-color: #58744B;
   }
   
-  /* Checkbox styles */
+
   .dias-semana {
     list-style: none;
     padding: 0;
@@ -298,13 +306,11 @@ main {
     list-style: none;
   }
   
-  /* File input styles */
   input[type="file"] {
     border: none;
     background-color: #f2f2f2;
   }
-  
-  /* Custom select styles */
+
   select {
     padding: 8px;
   }
@@ -328,5 +334,5 @@ section {
 .dias-semana li {
     margin-right: 20px;
     margin-bottom: 10px;
-    width: calc(50% - 20px); /* Two columns */
+    width: calc(50% - 20px); 
 }

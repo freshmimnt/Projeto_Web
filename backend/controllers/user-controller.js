@@ -72,9 +72,9 @@ const addUser = (req, res) => {
     });
 };
 
+
 const login = async (req, res) => {
     const { email, password } = req.body;
-    console.log(`Login attempt with email: ${email}`);
     try {
         const result = await pool.query(queries.login, [email]);
         if (result.rows.length === 0) {
@@ -89,9 +89,9 @@ const login = async (req, res) => {
                 req.session.userId = user.id;
                 req.session.userRole = user.role;
                 if (user.role === 'seller') {
-                    res.redirect('/geral');  // Redirect sellers to /geral
+                    res.redirect('/geral');  
                   } else {
-                    res.redirect('/vendedores'); // Redirect buyers to /vendedores
+                    res.redirect('/vendedores'); 
                   }
             }
         }
@@ -100,7 +100,6 @@ const login = async (req, res) => {
         res.status(500).send('Internal server error');
     }
 };
-
 
 /*const addUser = (req, res) => {
     const { name, phone, email, password, img, address } = req.body;
@@ -131,8 +130,6 @@ const login = async (req, res) => {
         });
     });
 };*/
-
-
 
 const deleteUser = (req, res) => {
     const id = parseInt(req.params.id)

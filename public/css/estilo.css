@@ -59,10 +59,10 @@ header {
     padding: 20px 45px 20px 20px;
 }
 
-.input-box input.no-arrow{
+input[type="number"].no-arrow::-webkit-inner-spin-button, 
+input[type="number"].no-arrow::-webkit-outer-spin-button { 
     -webkit-appearance: none; 
-    -moz-appearance: textfield; 
-    appearance: none; 
+    margin: 0; 
 }
 
 .input-box input::placeholder{

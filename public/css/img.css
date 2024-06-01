@@ -19,14 +19,21 @@
     border-radius: 10%;
 }
 
-/* General Image Styling */
 .seller-card img {
-    width: 150px;      /* Set the desired width */
-    height: 150px;     /* Set the desired height (same as width for a square) */
-    object-fit: cover;  /* Crop/scale image to fill container while maintaining aspect ratio */
-    display: block;     /* Prevent extra space below the image */
-    margin: 0 auto;     /* Center the image horizontally */
-  }
+    width: 150px;     
+    height: 150px;     
+    object-fit: cover;  
+    display: block;     
+    margin: 0 auto;     
+}
+
+.produto img{
+    width: 150px;     
+    height: 150px;     
+    object-fit: cover;  
+    display: block;     
+    margin: 0 auto;
+}
   
-  /* Other styles (circle, rounded, shadow) can remain the same */
+
   

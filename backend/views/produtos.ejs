@@ -99,6 +99,7 @@
     <div class="content-produtos">
       <% products.forEach(product => { %>
       <div class="produto" data-product-id="<%= product.id %>">
+        <img src="<%= product.img %>" alt="Product Image" />
         <h2 class="nome-produto"><%= product.name %></h2>
         <h1 class="preco-produto"><%= product.price %>€</h1>
         <span class="icone-clickable delete-icon">
