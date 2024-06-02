@@ -29,14 +29,14 @@
       </div>
       <div class="row" id="sellerRow">
         <% sellers.forEach((seller) => { %>
-        <div class="seller-card">
+        <div class="seller-card" data-seller-id="<% seller.id %>">
           <img src="<%= seller.img %>" alt="Seller Image" />
           <div class="seller-info">
             <h3><%= seller.store_name %></h3>
             <p><%= seller.store_category %></p>
           </div>
           <div class="seller-btn">
-            <a href="/vendedor/<%= seller.id %>">
+            <a href="/lojas/<% seller.id %> ">
               <button>Ver Perfil</button>
             </a>
           </div>

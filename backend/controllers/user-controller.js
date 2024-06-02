@@ -65,13 +65,53 @@ const addUser = (req, res) => {
                     } 
                 });
             } catch (error) {
-                console.error('Error hashing password or geocoding address:', error);
                 res.status(500).send('Internal server error');
             }
         }
     });
 };
 
+const addSeller = (req, res) => {
+    const { name, phone, email, password, address} = req.body;
+    const role = "seller";
+    pool.query(queries.checkEmailExists, [email], async (error, results) => {
+        if (error) {
+            throw error;
+        }
+        if (results.rows.length) {
+            res.send('Email already exists');
+        } else {
+            try {
+                const hashedPassword = await bcrypt.hash(password, 10);
+                const geocoder = require('node-geocoder')({
+                    provider: 'google',
+                    apiKey: process.env.API_KEY,
+                });
+                
+                geocoder.geocode(address, (err, result) => {
+                    if (err) {
+                        throw err;
+                    }
+                    if (result && result.length > 0) {
+                        const longitude = result[0].longitude;
+                        const latitude = result[0].latitude;
+                        
+                        if (longitude && latitude) {
+                            const location = `SRID=4326;POINT(${longitude} ${latitude})`;
+                            pool.query(queries.addUser, [name, phone, email, hashedPassword, location, address, role], (error, results) => {
+                                if (error) {
+                                    throw error;
+                                }
+                            });
+                        } 
+                    } 
+                });
+            } catch (error) {
+                res.status(500).send('Internal server error');
+            }
+        }
+    });
+};   
 
 const login = async (req, res) => {
     const { email, password } = req.body;
@@ -205,6 +245,7 @@ module.exports = {
     getUsers,
     getUserById,
     addUser,
+    addSeller,
     deleteUser,
     updateUser, 
     login,

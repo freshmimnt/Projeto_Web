@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Loja do comerciante</title>
+    <title>Loja do Comerciante</title>
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -17,87 +17,53 @@
 
     <div class="barra">
       <div class="avaliacoes">
-        <h2>Mercearia do Bairro</h2>
-        <br />
-        <p>5/5</p>
-        <p>Av. Dom Carlos I 4, 1200-649 Lisboa</p>
-        <p>Mercearia</p>
+        <% if (seller) { %>
+        <h2><%= seller.store_name %></h2>
+        <p><%= seller.address %></p>
+        <p><%= seller.store_category %></p>
+        <% } else { %>
+        <h2>Loja não encontrada</h2>
+        <% } %>
       </div>
     </div>
 
     <br />
 
+    <% if (seller) { %>
     <div class="container-produto">
-      <div class="produto">
-        <img src="img/cenoura.jpg" />
-        <h2>Cenoura 1kg</h2>
-        <br />
-        <h1>0,79€</h1>
+      <% products.forEach(product => { %>
+      <div class="produto" data-product-id="<%= product.id %>">
+        <img src="<%= product.img %>" alt="Imagem do produto" />
+        <h3 class="nome-produto"><%= product.name %></h3>
+        <h2 class="preco-produto"><%= product.price %>€</h2>
         <input class="input-size" type="number" value="1" min="1" />
         <br />
         <button class="add_carrinho">Adicionar</button>
       </div>
+      <% }); %>
     </div>
-
+    <% } %>
     <div class="container">
+      <% if (seller) { %>
       <h1>Avalie-nos</h1>
-      <form id="ratingForm">
-        <div class="star-rating">
-          <input type="radio" name="rating" id="star1" value="1" /><label
-            for="star1"
-            >&#9733;</label
-          >
-          <input type="radio" name="rating" id="star2" value="2" /><label
-            for="star2"
-            >&#9733;</label
-          >
-          <input type="radio" name="rating" id="star3" value="3" /><label
-            for="star3"
-            >&#9733;</label
-          >
-          <input type="radio" name="rating" id="star4" value="4" /><label
-            for="star4"
-            >&#9733;</label
-          >
-          <input type="radio" name="rating" id="star5" value="5" /><label
-            for="star5"
-            >&#9733;</label
-          >
-        </div>
-        <textarea id="comment" placeholder="Deixe um comentário"></textarea>
-        <button type="button" onclick="submitRating()">Enviar Avaliação</button>
-      </form>
+      <form id="ratingForm"></form>
+      <h2>Avaliações</h2>
       <div id="reviews">
-        <h2>Avaliações</h2>
+        <% if (reviews.length > 0) { %> <% reviews.forEach(review => { %>
+        <div class="review">
+          <div class="stars">
+            <% for (let i = 0; i < review.rating; i++) { %>&#9733;<% } %> <% for
+            (let i = review.rating; i < 5; i++) { %>&#9734;<% } %>
+          </div>
+          <p><%= review.comment %></p>
+        </div>
+        <% }); %> <% } else { %>
+        <p>Ainda não há avaliações para esta loja.</p>
+        <% } %>
       </div>
+      <% } %>
     </div>
+
     <%- include('partials/footer') %>
-    <script>
-      function submitRating() {
-        const rating = document.querySelector('input[name="rating"]:checked');
-        const comment = document.getElementById("comment").value;
-
-        if (rating && comment) {
-          const review = document.createElement("div");
-          review.classList.add("review");
-
-          const stars = document.createElement("div");
-          stars.classList.add("stars");
-          stars.innerHTML =
-            "&#9733;".repeat(rating.value) + "&#9734;".repeat(5 - rating.value);
-          review.appendChild(stars);
-
-          const commentText = document.createElement("p");
-          commentText.textContent = comment;
-          review.appendChild(commentText);
-
-          document.getElementById("reviews").appendChild(review);
-
-          document.getElementById("ratingForm").reset();
-        } else {
-          alert("Por favor, preencha a avaliação e o comentário.");
-        }
-      }
-    </script>
   </body>
 </html>

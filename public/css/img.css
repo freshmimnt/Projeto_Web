@@ -27,13 +27,10 @@
     margin: 0 auto;     
 }
 
-.produto img{
-    width: 150px;     
-    height: 150px;     
-    object-fit: cover;  
-    display: block;     
-    margin: 0 auto;
+.produto img {
+    max-width: 100%;             
+    height: auto;                
+    margin-bottom: 15px;
 }
-  
 
   

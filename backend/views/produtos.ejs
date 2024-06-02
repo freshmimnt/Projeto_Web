@@ -39,9 +39,9 @@
           </a>
         </li>
         <li class="item-menu">
-          <a href="#">
-            <span class="icon"></span>
-            <span class="txt-link"></span>
+          <a href="/perfil-vendedor">
+            <span class="icon"><i class="bx bx-user"></i></span>
+            <span class="txt-link">Meu Perfil</span>
           </a>
         </li>
       </ul>
@@ -100,14 +100,10 @@
       <% products.forEach(product => { %>
       <div class="produto" data-product-id="<%= product.id %>">
         <img src="<%= product.img %>" alt="Product Image" />
-        <h2 class="nome-produto"><%= product.name %></h2>
-        <h1 class="preco-produto"><%= product.price %>€</h1>
-        <span class="icone-clickable delete-icon">
-          <button class="delete-button"><i class="bi bi-trash3"></i></button>
-        </span>
-        <span class="icone-clickable edit-icon">
-          <button class="edit-button"><i class="bi bi-pencil"></i></button>
-        </span>
+        <h3 class="nome-produto"><%= product.name %></h3>
+        <h2 class="preco-produto"><%= product.price %>€</h2>
+        <button><i class="bi bi-trash3"></i></button>
+        <button><i class="bi bi-pencil"></i></button>
       </div>
       <% }); %>
     </div>

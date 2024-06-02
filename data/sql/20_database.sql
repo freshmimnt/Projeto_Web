@@ -34,15 +34,6 @@ CREATE TABLE sellers (
     seller_category_id INT REFERENCES seller_categories(id) ON DELETE CASCADE
 );
 
--- Create table seller_working_days
-CREATE TABLE seller_working_days (
-    id SERIAL PRIMARY KEY,
-    seller_id INT REFERENCES sellers(id) ON DELETE CASCADE,
-    day_of_week INT NOT NULL CHECK (day_of_week >= 0 AND day_of_week <= 6),
-    opening_time TIME,
-    closing_time TIME
-);
-
 -- Create table product
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,

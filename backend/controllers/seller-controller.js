@@ -37,7 +37,7 @@ const getLocation = (req, res) => {
               "#4BC0C0",
               "#9966FF",
               "#FF9F40"
-            ], // Add more colors if needed
+            ], 
           borderColor: [
               "#FF6384",
               "#36A2EB",
@@ -52,7 +52,6 @@ const getLocation = (req, res) => {
       res.json(chartData);
     });
   };
-    
 
 module.exports = {
     getSellers,

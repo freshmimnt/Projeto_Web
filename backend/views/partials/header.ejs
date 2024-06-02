@@ -27,7 +27,13 @@
         </div>
         <div class="topnav-right">
           <a href="/carrinho.html"><i class="bx bxs-shopping-bag"></i></a>
-          <a href="/login-usuario.html"><i class="bx bx-user"></i></a>
+          <div class="user-dropdown">
+            <a href="/login-usuario.html"><i class="bx bx-user"></i></a>
+            <div class="user-dropdown-content">
+              <a href="/perfil">Perfil</a>
+              <a href="/">Sair</a>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -38,7 +44,7 @@
           const dropdown = document.getElementById("categoryDropdown");
           categories.forEach((category) => {
             const link = document.createElement("a");
-            link.href = `/sellers?category=${category.id}`;
+            link.href = "/sellers?category=${category.id}";
             link.textContent = category.name;
             dropdown.appendChild(link);
           });

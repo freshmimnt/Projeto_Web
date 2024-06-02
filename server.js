@@ -1,14 +1,16 @@
 const express = require('express')
 const session = require('express-session')
 const pgSession = require('connect-pg-simple')(session);
+const lojaRoutes = require('./backend/routes/loja-routes');
 const userRoutes = require('./backend/routes/user-routes')
 const sellerRoutes = require('./backend/routes/seller-routes')
-const sellercategoriesRoutes = require('./backend/routes/sellercategory-routes')
+const sellerCategoriesRoutes = require('./backend/routes/sellercategory-routes')
 const productRoutes = require('./backend/routes/product-routes')
-const productcategoriesRoutes = require('./backend/routes/productcategory-routes')
+const productCategoriesRoutes = require('./backend/routes/productcategory-routes')
 const productQueries = require('./backend/queries/product-queries');
 const sellerQueries = require('./backend/queries/seller-queries');
 const userQueries = require('./backend/queries/user-queries');
+const sellerCategoriesQueries = require('./backend/queries/sellercategory-queries');
 const pool = require('./backend/models/database');
 const dotenv = require('dotenv')
 const multer = require('multer');
@@ -73,7 +75,12 @@ app.get('/registo-vendedor', (req, res) => {
     res.render('registo-vendedor');
 });
 app.get('/registo-vendedor2', (req, res) => {
-    res.render('registo-vendedor2');
+  pool.query(sellerCategoriesQueries.getSellerCategories,(error, results) => {
+    if (error) {
+      throw error
+    }
+    res.render('registo-vendedor2', {sellerCategories: results.rows});
+  });
 });
 app.get('/registo-vendedor3', (req, res) => {
     res.render('registo-vendedor3');
@@ -81,7 +88,31 @@ app.get('/registo-vendedor3', (req, res) => {
 app.get('/registo-vendedor-em-espera', (req, res) => {
     res.render('registro-em-espera');
 });
-
+app.get('/lojas/:id', async (req, res) => {
+  const seller_id = parseInt(req.params.id, 10);
+  if (isNaN(seller_id)) {
+    return res.status(400).send("ID de loja inválido. Por favor, insira um número.");
+  }
+  try {
+    const [productResult, reviewsResult, sellerResult] = await Promise.all([
+      pool.query(productQueries.getProductsById, [seller_id]),
+      pool.query(sellerQueries.getReviwsById, [seller_id]),
+      pool.query(sellerQueries.getSellerById, [seller_id])
+    ]);
+    if (sellerResult.rows.length === 0) {
+      return res.status(404).send('Loja não encontrada');
+    }
+    const data = {
+      seller: sellerResult.rows[0],
+      products: productResult.rows,
+      reviews: reviewsResult.rows
+    };
+    res.render('loja', data);
+  } catch (error) {
+    console.error('Error fetching data for loja page:', error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 app.get('/geral', async (req, res) => {
     const sellerId = 1;
     try {
@@ -101,8 +132,8 @@ app.get('/geral', async (req, res) => {
       res.status(500).send("Internal Server Error");
     }
 });
-app.get('/sellers', async (req, res) => {
-    const userId = 15; 
+app.get('/vendedores', async (req, res) => {
+    const userId = 1; 
     try {
       const addressResult = await pool.query(userQueries.getAddress, [userId]); 
       const address = addressResult.rows.length > 0 ? addressResult.rows[0].address : null;
@@ -113,7 +144,6 @@ app.get('/sellers', async (req, res) => {
         address,
         sellers: sellerResult.rows
       };
-      
       res.render('vendedores', data);
     } catch (error) {
       console.error("Error fetching seller data:", error);
@@ -122,7 +152,7 @@ app.get('/sellers', async (req, res) => {
 });
 app.get('/produtos', (req, res) => {
     const sellerId = 1;   
-    pool.query(productQueries.getProducts, [sellerId], (error, results) => {
+    pool.query(productQueries.getProductsBy, [sellerId], (error, results) => {
         if (error) {
             throw error;
         }
@@ -132,18 +162,20 @@ app.get('/produtos', (req, res) => {
 app.get('/gerenciamento', (req, res) => {
     res.render('gerenciamento');
 });
+app.get('/perfil-vendedor', (req, res) => {
+    res.render('perfil-vendedor');
+});
 app.get('/perfil', (req, res) => {
     res.render('perfil');
 });
-app.get('/loja', (req, res) => {
-  res.render('loja');
+app.get('/categorias', (req, res) => {
+  res.render('categorias');
 });
-
 app.use('/users', userRoutes);
 app.use('/sellers', sellerRoutes);
-app.use('/sellercategories', sellercategoriesRoutes);
+app.use('/sellercategories', sellerCategoriesRoutes);
 app.use('/products', productRoutes);
-app.use('/productcategories', productcategoriesRoutes);
+app.use('/productcategories', productCategoriesRoutes);
 app.use(express.static('public'));
 
 

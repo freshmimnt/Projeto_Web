@@ -15,215 +15,113 @@
         <i class="fa-solid">Farm2U</i>
       </div>
     </header>
-    <div class="lista-vendedor">
-      <div>
-        <label for="nome">Nome do Estabelecimento</label>
+    <form
+      action="/registo-vendedor3.html"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <div class="lista-vendedor">
+        <div>
+          <label for="nome">Nome do Estabelecimento</label>
+          <br />
+          <input type="text" id="nome" name="store_name" required />
+        </div>
         <br />
-        <input type="text" id="nome" name="name" required />
-      </div>
-      <br />
-      <div>
-        <label for="iban">IBAN</label>
+        <div>
+          <label for="iban">IBAN</label>
+          <br />
+          <input type="text" id="iban" name="iban" required />
+        </div>
         <br />
-        <input type="text" id="iban" name="iban" required />
-      </div>
-      <br />
-      <div>
-        <label for="escolhaOpcao">Tipo de Comércio</label>
+        <div>
+          <label for="escolhaOpcao">Tipo de Comércio</label>
+          <br />
+          <select id="escolhaOpcao" name="seller_category_id" required>
+            <option value="">Selecionar</option>
+            <% sellerCategories.forEach(category => { %>
+            <option value="<%= category.id %>"><%= category.name %></option>
+            <% }) %>
+          </select>
+        </div>
         <br />
-        <select id="escolhaOpcao" name="escolhaOpcao" required>
-          <option value="">Selecionar</option>
-          <option value="agricultor">Agricultor</option>
-          <option value="mercearia">Mercearia</option>
-          <option value="talho">Talho</option>
-          <option value="peixaria">Peixaria</option>
-          <option value="outro">Outro</option>
-        </select>
+        <div>
+          <label for="escolhaOpcao">Raio distância entregas</label>
+          <br />
+          <select id="escolhaOpcao" name="escolhaOpcao" required>
+            <option value="">Selecionar</option>
+            <option value="5">Até 5km</option>
+            <option value="10">Até 10km</option>
+            <option value="15">Até 15km</option>
+          </select>
+        </div>
       </div>
-      <br />
-      <div>
-        <label for="escolhaOpcao">Raio distância entregas</label>
+      <div class="upload">
+        <div>
+          <label for="uploadFotoEstablecimento">Foto da Loja</label>
+          <br />
+          <input
+            type="file"
+            id="uploadDocumentoVerso"
+            name="documentoVerso"
+            accept="image/*"
+            required
+          />
+        </div>
         <br />
-        <select id="escolhaOpcao" name="escolhaOpcao" required>
-          <option value="">Selecionar</option>
-          <option value="5km">Até 5km</option>
-          <option value="10km">Até 10km</option>
-          <option value="15km">Até 15km</option>
-        </select>
-      </div>
-    </div>
-    <div class="upload">
-      <div>
-        <label for="uploadFotoEstablecimento">Foto da Loja</label>
+        <div>
+          <label for="uploadDocumentoFrente"
+            >Foto do Documento de Identificação (FRENTE)</label
+          >
+          <br />
+          <input
+            type="file"
+            id="uploadDocumentoFrente"
+            name="documentoFrente"
+            accept="image/*"
+            required
+          />
+        </div>
         <br />
-        <input
-          type="file"
-          id="uploadDocumentoVerso"
-          name="documentoVerso"
-          accept="image/*"
-          required
-        />
-      </div>
-      <br />
-      <div>
-        <label for="uploadDocumentoFrente"
-          >Foto do Documento de Identificação (FRENTE)</label
-        >
+        <div>
+          <label for="uploadDocumentoVerso"
+            >Foto do Documento de Identificação (VERSO)</label
+          >
+          <br />
+          <input
+            type="file"
+            id="uploadDocumentoVerso"
+            name="documentoVerso"
+            accept="image/*"
+            required
+          />
+        </div>
         <br />
-        <input
-          type="file"
-          id="uploadDocumentoFrente"
-          name="documentoFrente"
-          accept="image/*"
-          required
-        />
-      </div>
-      <br />
-      <div>
-        <label for="uploadDocumentoVerso"
-          >Foto do Documento de Identificação (VERSO)</label
-        >
+        <div>
+          <label for="uploadIban">Foto Comprovativo IBAN</label>
+          <br />
+          <input
+            type="file"
+            id="uploadIban"
+            name="documentoIban"
+            accept="image/*"
+            required
+          />
+        </div>
         <br />
-        <input
-          type="file"
-          id="uploadDocumentoVerso"
-          name="documentoVerso"
-          accept="image/*"
-          required
-        />
+        <div>
+          <label for="uploadLicenca">Foto da Licença Comercial</label>
+          <br />
+          <input
+            type="file"
+            id="uploadLicenca"
+            name="documentoLicenca"
+            accept="image/*"
+            required
+          />
+        </div>
       </div>
-      <br />
-      <div>
-        <label for="uploadIban">Foto Comprovativo IBAN</label>
-        <br />
-        <input
-          type="file"
-          id="uploadIban"
-          name="documentoIban"
-          accept="image/*"
-          required
-        />
-      </div>
-      <br />
-      <div>
-        <label for="uploadLicenca">Foto da Licença Comercial</label>
-        <br />
-        <input
-          type="file"
-          id="uploadLicenca"
-          name="documentoLicenca"
-          accept="image/*"
-          required
-        />
-      </div>
-    </div>
-
-    <div class="horario">
-      <div>
-        <label for="horario-funcionamento">Horário de Funcionamento</label>
-      </div>
-      <br />
-      <div class="dias-semana">
-        <input
-          type="checkbox"
-          id="segunda-entrega"
-          name="diaSemanaEntrega"
-          value="segunda"
-        />
-        <label for="segunda-entrega">Segunda-Feira</label>
-        <label for="hora-abertura-segunda"></label>
-        <input type="time" name="horaAbertura" id="hora-abertura-segunda" />
-        <label for="hora-fechamento-segunda"></label>
-        <input type="time" name="horaFechamento" id="hora-fechamento-segunda" />
-      </div>
-      <br />
-      <div class="dias-semana">
-        <input
-          type="checkbox"
-          id="terca-entrega"
-          name="diaSemanaEntrega"
-          value="terca"
-        />
-        <label for="terca-entrega">Terça-Feira</label>
-        <label for="hora-abertura-terca"></label>
-        <input type="time" name="horaAbertura" id="hora-abertura-terca" />
-        <label for="hora-fechamento-terca"></label>
-        <input type="time" name="horaFechamento" id="hora-fechamento-terca" />
-      </div>
-      <br />
-      <div class="dias-semana">
-        <input
-          type="checkbox"
-          id="quarta-entrega"
-          name="diaSemanaEntrega"
-          value="quarta"
-        />
-        <label for="quarta-entrega">Quarta-Feira</label>
-        <label for="hora-abertura-quarta"></label>
-        <input type="time" name="horaAbertura" id="hora-abertura-quarta" />
-        <label for="hora-fechamento-quarta"></label>
-        <input type="time" name="horaFechamento" id="hora-fechamento-quarta" />
-      </div>
-      <br />
-      <div class="dias-semana">
-        <input
-          type="checkbox"
-          id="quinta-entrega"
-          name="diaSemanaEntrega"
-          value="quinta"
-        />
-        <label for="quinta-entrega">Quinta-Feira</label>
-        <label for="hora-abertura-quinta"></label>
-        <input type="time" name="horaAbertura" id="hora-abertura-quinta" />
-        <label for="hora-fechamento-quinta"></label>
-        <input type="time" name="horaFechamento" id="hora-fechamento-quinta" />
-      </div>
-      <br />
-      <div class="dias-semana">
-        <input
-          type="checkbox"
-          id="sexta-entrega"
-          name="diaSemanaEntrega"
-          value="sexta"
-        />
-        <label for="sexta-entrega">Sexta-Feira</label>
-        <label for="hora-abertura-sexta"></label>
-        <input type="time" name="horaAbertura" id="hora-abertura-sexta" />
-        <label for="hora-fechamento-sexta"></label>
-        <input type="time" name="horaFechamento" id="hora-fechamento-sexta" />
-      </div>
-      <br />
-      <div class="dias-semana">
-        <input
-          type="checkbox"
-          id="sabado-entrega"
-          name="diaSemanaEntrega"
-          value="sabado"
-        />
-        <label for="sabado-entrega">Sábado</label>
-        <label for="hora-abertura-sabado"></label>
-        <input type="time" name="horaAbertura" id="hora-abertura-sabado" />
-        <label for="hora-fechamento-sexta"></label>
-        <input type="time" name="horaFechamento" id="hora-fechamento-sabado" />
-      </div>
-      <br />
-      <div class="dias-semana">
-        <input
-          type="checkbox"
-          id="domingo-entrega"
-          name="diaSemanaEntrega"
-          value="domingo"
-        />
-        <label for="domingo-entrega">Domingo</label>
-        <label for="hora-abertura-domingo"></label>
-        <input type="time" name="horaAbertura" id="hora-abertura-domingo" />
-        <label for="hora-fechamento-domingo"></label>
-        <input type="time" name="horaFechamento" id="hora-fechamento-domingo" />
-      </div>
-      <br />
-      <form action="/registo-vendedor3.html">
         <button class="button">Próximo</button>
-      </form>
-    </div>
+      </div>
+    </form>
   </body>
 </html>

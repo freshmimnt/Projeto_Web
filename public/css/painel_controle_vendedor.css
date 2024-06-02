@@ -7,11 +7,9 @@
     font-family: 'Outfit', sans-serif;
 }
 
-body{
-    height: 100vh;
-   
+body {
+    margin-left: 300px; 
 }
-
 
 nav.menu-lateral{
     width: 300px;
@@ -19,7 +17,6 @@ nav.menu-lateral{
     background-color: #3E3C3C ;
     padding: 40px 0 40px 1%;
     box-shadow: 3px 0 0 #548149 ;
-
     position: fixed;
     top: 0;
     left: 0;
@@ -74,8 +71,6 @@ body {
     padding: 0;
     display: flex;
 }
-
-
 
 .content,
 .content-pick-ups {
@@ -165,26 +160,20 @@ th {
     justify-content: flex-start;
 }
 
-
 .produto {
-    width: calc(33.33% - 20px); 
-    height: calc(25% - 20px);
+    width: 200px;
+    height: 300px;
     margin: 10px;
     background-color: #f2f2f2;
     padding: 20px;
     text-align: center;
+    border-radius: 8px;
 }
 
-
-
-
-.icone-clickable {
+.produto button {
     cursor: pointer;
-}
-
-
-.icone-clickable {
     margin-right: 20px; 
+    border-radius: 5px;
 }
 
 .modal {
