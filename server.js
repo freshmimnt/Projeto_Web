@@ -38,7 +38,7 @@ app.use(session({
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public/uploads/seller_images');  
+    cb(null, 'public/uploads/seller_images');   
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + '-' + file.originalname); 
@@ -46,17 +46,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-app.post('/sellers/:id/upload-image', upload.single('sellerImage'), async (req, res) => {
-  const sellerId = req.params.id;
-  const imagePath = `/uploads/seller_images/${req.file.filename}`; 
-  try {
-    await pool.query(sellerQueries.updateSellerImage, [imagePath, sellerId]);
-    res.redirect('/sellers'); 
-  } catch (error) {
-    console.error("Error updating seller image:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
 
 app.get('/', (req, res) => {
     res.render('landing-page');
@@ -73,14 +62,6 @@ app.get('/registo-comprador', (req, res) => {
 });
 app.get('/registo-vendedor', (req, res) => {
     res.render('registo-vendedor');
-});
-app.get('/registo-vendedor2', (req, res) => {
-  pool.query(sellerCategoriesQueries.getSellerCategories,(error, results) => {
-    if (error) {
-      throw error
-    }
-    res.render('registo-vendedor2', {sellerCategories: results.rows});
-  });
 });
 app.get('/registo-vendedor3', (req, res) => {
     res.render('registo-vendedor3');
@@ -152,7 +133,7 @@ app.get('/vendedores', async (req, res) => {
 });
 app.get('/produtos', (req, res) => {
     const sellerId = 1;   
-    pool.query(productQueries.getProductsBy, [sellerId], (error, results) => {
+    pool.query(productQueries.getProductsById, [sellerId], (error, results) => {
         if (error) {
             throw error;
         }

@@ -3,21 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Criar Conta</title>
     <link rel="icon" href="/img/logo-small.png" type="image/x-icon" />
     <link rel="stylesheet" href="/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="/css/vendedor.css" type="text/css" />
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-  </head>
 
-  <body class="register-seller">
-    <h1 class="seller-h1">Alcance novos clientes com Farm2U!</h1>
-    <br />
-    <div class="wrapper">
-      <form action="/users/seller" method="POST" enctype="multipart/form-data">
+    <link rel="stylesheet" href="/css/registro_vendedor2.css" />
+    <title>Registo de Informações Extras</title>
+  </head>
+  <body class="container">
+    <header>
+      <div class="head">
+        <i class="fa-solid">Farm2U</i>
+      </div>
+    </header>
+    <form action="/users/seller" method="post">
+      <div class="lista-vendedor">
         <h2>
           Registrar-se na Farm2U nunca foi tão fácil. Torna-se um parceiro agora
           mesmo!
@@ -52,94 +51,55 @@
           />
           <i class="bx bxs-phone"></i>
         </div>
-        <button type="submit" class="btn">Continuar</button>
-        <div class="register">
-          <p>Já tem conta? <a href="/login">Iniciar Sessão</a></p>
+        <input type="hidden" name="role" value="seller" />
+        <div>
+          <label for="nome">Nome do Estabelecimento</label>
+          <br />
+          <input type="text" id="nome" name="store_name" required />
         </div>
-      </form>
-    </div>
-    <section>
-      <h2 class="title">Perguntas Frequentes</h2>
-      <div class="pf">
-        <div class="question">
-          <h3>
-            Quais os documentos necessários para se registar como parceiro?
-          </h3>
-          <svg width="15" height="10" viewBox="0 0 42 25">
-            <path
-              d="M3 3L21 21L39 3"
-              stroke="white"
-              stroke-width="7"
-              stroke-linecap="round"
-            ></path>
-          </svg>
-          <div class="answer">
-            <p>
-              Foto do Estabelecimento, foto do documento de Identificação, foto
-              do Comprovativo de IBAN e uma foto da licença comercial
-            </p>
-          </div>
+        <br />
+        <div>
+          <label for="iban">IBAN</label>
+          <br />
+          <input type="text" id="iban" name="iban" required />
         </div>
-      </div>
-      <div class="pf">
-        <div class="question">
-          <h3>Como fazer chegar o meu produto ao meu cliente?</h3>
-          <svg width="15" height="10" viewBox="0 0 42 25">
-            <path
-              d="M3 3L21 21L39 3"
-              stroke="white"
-              stroke-width="7"
-              stroke-linecap="round"
-            ></path>
-          </svg>
-          <div class="answer">
-            <p>
-              Para fazer o seu produto chegar ao cliente tem 2 opções
-              <strong>obrigatorias:</strong> Pick Up e Entrega ao Domicilio
-            </p>
-          </div>
+        <br />
+        <div>
+          <label for="escolhaOpcao">Tipo de Comércio</label>
+          <br />
+          <select id="escolhaOpcao" name="seller_category_id" required>
+            <option value="">Selecionar</option>
+            <% sellerCategories.forEach(category => { %>
+            <option value="<%= category.id %>"><%= category.name %></option>
+            <% }) %>
+          </select>
+        </div>
+        <br />
+        <div>
+          <label for="escolhaOpcao">Raio distância entregas</label>
+          <br />
+          <select id="escolhaOpcao" name="delivery_radius" required>
+            <option value="">Selecionar</option>
+            <option value="5">Até 5km</option>
+            <option value="10">Até 10km</option>
+            <option value="15">Até 15km</option>
+          </select>
         </div>
       </div>
-      <div class="pf">
-        <div class="question">
-          <h3>Quanto tempo demora para se tornar um parceiro?</h3>
-          <svg width="15" height="10" viewBox="0 0 42 25">
-            <path
-              d="M3 3L21 21L39 3"
-              stroke="white"
-              stroke-width="7"
-              stroke-linecap="round"
-            ></path>
-          </svg>
-          <div class="answer">
-            <p>A verificação da sua conta deve demorar no máximo 48 horas</p>
-          </div>
+      <div class="upload">
+        <div>
+          <label for="uploadFotoEstablecimento">Foto da Loja</label>
+          <br />
+          <input
+            type="file"
+            id="uploadImg"
+            name="img"
+            accept="image/*"
+            required
+          />
         </div>
+        <button class="button">Próximo</button>
       </div>
-      <div class="pf">
-        <div class="question">
-          <h3>Quanto é a taxa da Farm2U?</h3>
-          <svg width="15" height="10" viewBox="0 0 42 25">
-            <path
-              d="M3 3L21 21L39 3"
-              stroke="white"
-              stroke-width="7"
-              stroke-linecap="round"
-            ></path>
-          </svg>
-          <div class="answer">
-            <p>A Farm2U tem uma taxa de 5% por cada pedido.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <script>
-      const faqs = document.querySelectorAll(".pf");
-      faqs.forEach((pf) => {
-        pf.addEventListener("click", () => {
-          pf.classList.toggle("active");
-        });
-      });
-    </script>
+    </form>
   </body>
 </html>

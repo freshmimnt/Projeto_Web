@@ -2,10 +2,6 @@ const pool = require('../models/database')
 const queries = require('../queries/user-queries')
 const bcrypt = require('bcryptjs')
 const dotenv = require('dotenv')
-const formData = require('form-data');
-const Mailgun = require('mailgun.js');
-const mailgun = new Mailgun(formData);
-const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY });
 
 dotenv.config()
 
@@ -72,14 +68,13 @@ const addUser = (req, res) => {
 };
 
 const addSeller = (req, res) => {
-    const { name, phone, email, password, address} = req.body;
-    const role = "seller";
+    const { name, phone, email, password, address, role} = req.body;
     pool.query(queries.checkEmailExists, [email], async (error, results) => {
         if (error) {
             throw error;
-        }
+         }
         if (results.rows.length) {
-            res.send('Email already exists');
+            res.send('Email já existe');
         } else {
             try {
                 const hashedPassword = await bcrypt.hash(password, 10);
@@ -88,7 +83,7 @@ const addSeller = (req, res) => {
                     apiKey: process.env.API_KEY,
                 });
                 
-                geocoder.geocode(address, (err, result) => {
+                geocoder.geocode(address, async (err, result) => {
                     if (err) {
                         throw err;
                     }
@@ -98,10 +93,12 @@ const addSeller = (req, res) => {
                         
                         if (longitude && latitude) {
                             const location = `SRID=4326;POINT(${longitude} ${latitude})`;
-                            pool.query(queries.addUser, [name, phone, email, hashedPassword, location, address, role], (error, results) => {
+                            const newUserResult = await pool.query(queries.addUser, [name, phone, email, hashedPassword, location, address, role], (error, results) => {
                                 if (error) {
                                     throw error;
                                 }
+                                const userId = newUserResult.rows[0].id;
+                                res.redirect(`/sellers/register2/${userId}`);
                             });
                         } 
                     } 
@@ -111,7 +108,7 @@ const addSeller = (req, res) => {
             }
         }
     });
-};   
+};  
 
 const login = async (req, res) => {
     const { email, password } = req.body;
@@ -140,36 +137,6 @@ const login = async (req, res) => {
         res.status(500).send('Internal server error');
     }
 };
-
-/*const addUser = (req, res) => {
-    const { name, phone, email, password, img, address } = req.body;
-    
-    pool.query(queries.checkEmailExists, [email], (error, results) => {
-        if (error) {
-            return res.status(500).send('Error checking email existence');
-        }
-        if (results.rows.length) {
-            return res.status(400).send('Email already exists');
-        }
-        
-        pool.query(queries.addUser, [name, phone, email, password, img, address], (error, results) => {
-            if (error) {
-                return res.status(500).send('Error adding user');
-            }
-        
-            res.status(201).send(`User added`);
-            mg.messages.create('sandboxdefad76504a145d1b324f42d01571356.mailgun.org', {
-                from: "josephjoestarpurple0@gmail.com",
-                to: email,
-                subject: "Verifica o teu endereço de email",
-                html: "<p>Obrigado por criar uma conta no Farm2U</p> <p>Por Favor clique no link para verificar o seu email:</p>"
-               
-            })
-            .then(msg => console.log('Email sent successfully')) 
-            .catch(err => console.error('Error sending email:', err));
-        });
-    });
-};*/
 
 const deleteUser = (req, res) => {
     const id = parseInt(req.params.id)

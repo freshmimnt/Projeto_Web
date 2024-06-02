@@ -3,7 +3,6 @@ const addProduct = "INSERT INTO products (name, price, product_stock, product_ca
 const deleteProduct = "DELETE FROM products WHERE id = $1";
 const updateProduct = "UPDATE products SET name = $1, price = $2, product_stock = $3 WHERE id = $4";
 const average = "SELECT AVG(price) FROM products WHERE seller_id = $1"; 
-const std = "SELECT stddev_samp(price) FROM products WHERE seller_id = $1";
 const expensive = "SELECT MAX(price) FROM products WHERE seller_id = $1";
 const cheapest = "SELECT MIN(price) FROM products WHERE seller_id = $1";
 
@@ -13,7 +12,6 @@ module.exports = {
     deleteProduct,
     updateProduct,
     average,
-    std,
     expensive,
     cheapest,
 };
