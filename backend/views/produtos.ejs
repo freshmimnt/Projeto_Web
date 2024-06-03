@@ -57,7 +57,17 @@
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Adicionar Novo Produto</h2>
-        <form id="addProductForm" action="/products" method="post">
+        <form id="addProductForm">
+          <div class="form-group">
+            <label for="productImage">Imagem do Produto:</label>
+            <input
+              type="file"
+              class="form-control-file"
+              id="productImage"
+              name="img"
+              accept="image/*"
+            />
+          </div>
           <div class="form-group">
             <label for="productName">Nome do Produto:</label>
             <input
@@ -80,6 +90,17 @@
             />
           </div>
           <div class="form-group">
+            <label for="escolhaOpcao">Categoria produto</label>
+            <br />
+            <select id="escolhaOpcao" name="product_category_id" required>
+              <option value="selecionar">Selecionar</option>
+              <% productCategories.forEach(category => { %>
+              <option value="<%= category.id %>"><%= category.name%></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="form-group">
             <label for="productStock">Quantidade em Estoque:</label>
             <input
               type="number"
@@ -90,8 +111,6 @@
               required
             />
           </div>
-          <input type="hidden" name="product_category_id" value="1" />
-          <input type="hidden" name="seller_id" value="1" />
           <button type="submit" class="btn">Adicionar Produto</button>
         </form>
       </div>

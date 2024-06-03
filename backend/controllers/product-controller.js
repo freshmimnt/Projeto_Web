@@ -3,8 +3,9 @@ const queries = require('../queries/product-queries');
 
 
 const addProduct = (req, res) => {
-    const { name, price, product_stock, product_category_id, seller_id } = req.body;
-    pool.query(queries.addProduct, [name, price, product_stock, product_category_id, seller_id], (error, results) => {
+    const { name, price, product_stock, product_category_id} = req.body;
+    const user_seller_id = req.session.userId; 
+    pool.query(queries.addProduct, [name, price, product_stock, product_category_id, user_seller_id], (error, results) => {
         if (error) {
             throw error;
         }

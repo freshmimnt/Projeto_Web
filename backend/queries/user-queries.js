@@ -1,7 +1,14 @@
 const getUsers = "SELECT * FROM users";
 const getUserById = "SELECT * FROM users WHERE id = $1";
 const addUser = "INSERT INTO users (name, phone, email, password, location, address) VALUES ($1, $2, $3, $4, $5, $6) ";
-const addSeller = "INSERT INTO users (name, phone, email, password, location, address, role) VALUES ($1, $2, $3, $4, $5, $6, $7) ";
+
+const addSeller = `
+    INSERT INTO users (
+        name, phone, email, password, location, address, 
+        role, store_name, delivery_radius, seller_category_id
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+`;
+
 const checkEmailExists = "SELECT s FROM users s WHERE s.email = $1";
 const deleteUser = "DELETE FROM users WHERE id = $1";
 const updateUser = "UPDATE users SET name = $1, phone = $2, email = $3, password = $4, location = $5 address = $6 WHERE id = $7";

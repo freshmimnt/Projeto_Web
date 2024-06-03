@@ -44,7 +44,7 @@
           const dropdown = document.getElementById("categoryDropdown");
           categories.forEach((category) => {
             const link = document.createElement("a");
-            link.href = "/sellers?category=${category.id}";
+            link.href = `/categorias/${category.id}`;
             link.textContent = category.name;
             dropdown.appendChild(link);
           });

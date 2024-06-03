@@ -15,23 +15,23 @@
         <i class="fa-solid">Farm2U</i>
       </div>
     </header>
-    <form action="/users/seller" method="post">
+    <h1>
+      Registrar-se na Farm2U nunca foi tão fácil. Torna-se um parceiro agora
+      mesmo!
+    </h1>
+    <form action="/users/seller" method="POST" enctype="multipart/form-data">
       <div class="lista-vendedor">
-        <h2>
-          Registrar-se na Farm2U nunca foi tão fácil. Torna-se um parceiro agora
-          mesmo!
-        </h2>
         <div class="input-box">
           <input type="text" name="name" placeholder="Nome" required />
-          <i class="bx bxs-user"></i>
+          
         </div>
         <div class="input-box">
           <input type="text" name="email" placeholder="Email" required />
-          <i class="bx bxs-envelope"></i>
+          
         </div>
         <div class="input-box">
           <input type="password" placeholder="Palavra-Passe" required />
-          <i class="bx bxs-lock-alt"></i>
+          
         </div>
         <div class="input-box">
           <input
@@ -51,17 +51,10 @@
           />
           <i class="bx bxs-phone"></i>
         </div>
-        <input type="hidden" name="role" value="seller" />
         <div>
           <label for="nome">Nome do Estabelecimento</label>
           <br />
           <input type="text" id="nome" name="store_name" required />
-        </div>
-        <br />
-        <div>
-          <label for="iban">IBAN</label>
-          <br />
-          <input type="text" id="iban" name="iban" required />
         </div>
         <br />
         <div>
@@ -84,22 +77,7 @@
             <option value="10">Até 10km</option>
             <option value="15">Até 15km</option>
           </select>
-        </div>
-      </div>
-      <div class="upload">
-        <div>
-          <label for="uploadFotoEstablecimento">Foto da Loja</label>
-          <br />
-          <input
-            type="file"
-            id="uploadImg"
-            name="img"
-            accept="image/*"
-            required
-          />
-        </div>
-        <button class="button">Próximo</button>
-      </div>
+      <button type="submit" class="button">Próximo</button>
     </form>
   </body>
 </html>

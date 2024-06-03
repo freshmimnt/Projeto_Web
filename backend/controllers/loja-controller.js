@@ -4,12 +4,12 @@ const productQueries = require('../queries/product-queries');
 const sellerQueries = require('../queries/seller-queries');
 
 const getLojaById = async (req, res) => {
-    const seller_id = parseInt(req.params.id);
+    const userId = parseInt(req.params.id);
     try{
         const [productResult, reviewsResult,sellerResult] = await Promise.all([
-            pool.query(productQueries.getProductsById, [seller_id]),
-            pool.query(sellerQueries.getReviwsById, [seller_id]),
-            pool.query(sellerQueries.getSellerById, [seller_id])
+            pool.query(productQueries.getProductsById, [userId]),
+            pool.query(sellerQueries.getReviwsById, [userId]),
+            pool.query(sellerQueries.getSellerById, [userId])
         ]);
         const data = {
             seller: sellerResult.rows[0],

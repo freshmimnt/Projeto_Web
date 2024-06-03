@@ -21,8 +21,7 @@
 
     <div class="seller">
       <div class="title">
-        <h2>Todos os Vendedores disponíveis</h2>
-        <h2 id="categoria"><%= categories %></h2>
+        <h2>Todos/as os/as <%= category.name %> disponíveis</h2>
       </div>
       <div class="row" id="sellerRow">
         <% sellers.forEach((seller) => { %>
@@ -33,7 +32,7 @@
             <p><%= seller.store_category %></p>
           </div>
           <div class="seller-btn">
-            <a href="/vendedor/<%= seller.id %>">
+            <a href="/lojas/<%= seller.id %> ">
               <button>Ver Perfil</button>
             </a>
           </div>

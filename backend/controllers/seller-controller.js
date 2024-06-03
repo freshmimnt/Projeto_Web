@@ -21,8 +21,8 @@ const getLocation = (req, res) => {
 };
   
 const getProductCategoryDistribution = (req, res) =>{
-  const seller_id = parseInt(req.params.id);
-  pool.query(queries.getProductCategoryDistribution, [seller_id],(error, results) =>{
+  const userId = parseInt(req.params.id);
+  pool.query(queries.getProductCategoryDistribution, [userId],(error, results) =>{
      if (error) {
       throw error;
     }
@@ -54,50 +54,8 @@ const getProductCategoryDistribution = (req, res) =>{
   });
 };
 
-
-
-const addStore = async (req, res) => {
-  try {
-    const userId = parseInt(req.params.userId, 10); 
-
-    if (isNaN(userId)) {
-      return res.status(400).send("ID de usuário inválido.");
-    }
-    const { iban, store_name, delivery_radius, seller_category_id } = req.body;
-    const img = req.file ? `/uploads/seller_images/${req.file.filename}` : null; 
-    await pool.query(queries.addStore, [
-      iban,
-      store_name,
-      delivery_radius,
-      img,
-      userId,
-      seller_category_id,
-    ]);
-
-    res.redirect('/registo-vendedor-em-espera');
-  } catch (error) {
-    console.error("Error adding or updating seller:", error);
-    res.status(500).send("Internal Server Error");
-  }
-};
-
-const getSellerRegistrationForm2 = async (req, res) => {
-  try {
-      const userId = req.params.userId; 
-      const categoriesResult = await pool.query('SELECT * FROM seller_categories'); 
-
-      res.render('registo-vendedor2', { userId, sellerCategories: categoriesResult.rows});
-  } catch (error) {
-      console.error('Error fetching seller categories:', error);
-      res.status(500).send("Internal Server Error");
-  }
-};
-
-
 module.exports = {
   getSellers,
   getLocation,  
   getProductCategoryDistribution,  
-  addStore,
-  getSellerRegistrationForm2,
 }
