@@ -30,7 +30,7 @@
           
         </div>
         <div class="input-box">
-          <input type="password" placeholder="Palavra-Passe" required />
+          <input type="password" name="password" placeholder="Palavra-Passe" required />
           
         </div>
         <div class="input-box">
@@ -77,6 +77,16 @@
             <option value="10">Até 10km</option>
             <option value="15">Até 15km</option>
           </select>
+          <br>
+          <label for="productImage">Imagem do Produto:</label>
+          <input
+            type="file"
+            class="form-control-file"
+            id="productImage"
+            name="img"
+            accept="image/*"
+          />
+        </div>
       <button type="submit" class="button">Próximo</button>
     </form>
   </body>

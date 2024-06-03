@@ -68,47 +68,49 @@ const addUser = (req, res) => {
 };
 
 const addSeller = (req, res) => {
-    console.log(req.body)
-    
     const { name, phone, email, password, address, store_name, delivery_radius, seller_category_id } = req.body;
     const role = 'seller';  
-
+    const img = `/uploads/seller_images/${req.file.filename}` 
+    console.log(img);
     pool.query(queries.checkEmailExists, [email], async (error, results) => {
         if (error) {
             throw error;
         }
+        
         if (results.rows.length) {
             res.send('Email already exists');
         } else {
             try {
+                
                 const hashedPassword = await bcrypt.hash(password, 10);
+                
                 const geocoder = require('node-geocoder')({
                     provider: 'google',
                     apiKey: process.env.API_KEY,
                 });
-
+            
                 geocoder.geocode(address, (err, result) => {
                     if (err) {
                         throw err;
                     }
-
                     if (result && result.length > 0) {
                         const longitude = result[0].longitude;
                         const latitude = result[0].latitude;
 
                         if (longitude && latitude) {
                             const location = `SRID=4326;POINT(${longitude} ${latitude})`;
-                            pool.query(queries.addSeller, [name, phone, email, hashedPassword, location, address, role, store_name, delivery_radius, seller_category_id], (error, results)=>{
+                            pool.query(queries.addSeller, [name, phone, email, hashedPassword, img ,location, address, role, store_name, delivery_radius, seller_category_id], (error, results)=>{
                                 if (error) {
                                     throw error;
                                 }
-                                res.redirect('/login');
+                                
                             });
                         } 
                     } 
                 });
+                res.redirect('/login');
             } catch (error) {
-                res.status(500).send("Internal Server Error");
+                res.status(500).send("Internal Server Error" + error);
             }
         }
     });

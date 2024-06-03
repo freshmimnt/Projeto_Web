@@ -4,12 +4,12 @@ const addUser = "INSERT INTO users (name, phone, email, password, location, addr
 
 const addSeller = `
     INSERT INTO users (
-        name, phone, email, password, location, address, 
+        name, phone, email, password, img, location, address, 
         role, store_name, delivery_radius, seller_category_id
-    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
 `;
 
-const checkEmailExists = "SELECT s FROM users s WHERE s.email = $1";
+const checkEmailExists = "SELECT email FROM users WHERE email = $1";
 const deleteUser = "DELETE FROM users WHERE id = $1";
 const updateUser = "UPDATE users SET name = $1, phone = $2, email = $3, password = $4, location = $5 address = $6 WHERE id = $7";
 const getAddress = "SELECT substring(address from '^[^,]+') as address FROM users WHERE id = $1";

@@ -87,6 +87,7 @@ app.get('/categorias/:id', async (req, res) => {
 });
 app.get('/lojas/:id', async (req, res) => {
   const seller_id = parseInt(req.params.id);
+  const userId = req.session.userId;
   try {
     const [productResult, reviewsResult, sellerResult] = await Promise.all([
       pool.query(productQueries.getProductsById, [seller_id]),

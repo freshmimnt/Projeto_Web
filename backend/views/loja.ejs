@@ -21,14 +21,13 @@
         <h2><%= seller.store_name %></h2>
         <p><%= seller.address %></p>
         <p><%= seller.store_category %></p>
+        <p><%= seller.id %></p>
         <% } else { %>
         <h2>Loja não encontrada</h2>
         <% } %>
       </div>
     </div>
-
     <br />
-
     <% if (seller) { %>
     <div class="container-produto">
       <% products.forEach(product => { %>
@@ -46,7 +45,37 @@
     <div class="container">
       <% if (seller) { %>
       <h1>Avalie-nos</h1>
-      <form id="ratingForm"></form>
+      <form id="ratingForm" method="post">
+        <div class="star-rating">
+          <input type="radio" name="rating" id="star1" value="1" /><label
+            for="star1"
+            >&#9733;</label
+          >
+          <input type="radio" name="rating" id="star2" value="2" /><label
+            for="star2"
+            >&#9733;</label
+          >
+          <input type="radio" name="rating" id="star3" value="3" /><label
+            for="star3"
+            >&#9733;</label
+          >
+          <input type="radio" name="rating" id="star4" value="4" /><label
+            for="star4"
+            >&#9733;</label
+          >
+          <input type="radio" name="rating" id="star5" value="5" /><label
+            for="star5"
+            >&#9733;</label
+          >
+        </div>
+        <textarea
+          id="comment"
+          name="comment"
+          placeholder="Deixe um comentário"
+        ></textarea>
+        <input type="text" hidden="" />
+        <button type="submit">Enviar Avaliação</button>
+      </form>
       <h2>Avaliações</h2>
       <div id="reviews">
         <% if (reviews.length > 0) { %> <% reviews.forEach(review => { %>
