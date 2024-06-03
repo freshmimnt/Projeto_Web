@@ -15,17 +15,12 @@ const productCategoryQueries = require('./backend/queries/productcategory-querie
 const orderQueries = require('./backend/queries/order-queries');
 const pool = require('./backend/models/database');
 const dotenv = require('dotenv')
-const bodyParser = require('body-parser');
+
 dotenv.config()
 
 const app = express();
-const PORT = 4000
+const PORT = 10000
 
-// support parsing of application/json type post data
-app.use(bodyParser.json());
-
-//support parsing of application/x-www-form-urlencoded post data
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
