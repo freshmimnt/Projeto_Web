@@ -2,6 +2,7 @@
 const pool = require('../models/database');
 const productQueries = require('../queries/product-queries');
 const sellerQueries = require('../queries/seller-queries');
+const lojaQueries = require('../queries/loja-queries');
 
 const getLojaById = async (req, res) => {
     const userId = parseInt(req.params.id);
@@ -23,8 +24,20 @@ const getLojaById = async (req, res) => {
     }
 };
 
+const addCart = (req, res) => {
+    const userId = parseInt(req.session.userId);
+    const productId = parseInt(req.body.productId);
+    pool.query(lojaQueries.addCart, [userId, productId], (error, results) => {
+        if (error) {
+            throw error;
+        }
+        res.render('/cart')
+    });
+};
+
 module.exports = {
     getLojaById,
+    addCart,
 };
 
 

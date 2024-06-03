@@ -21,7 +21,7 @@ const getLocation = (req, res) => {
 };
   
 const getProductCategoryDistribution = (req, res) =>{
-  const userId = parseInt(req.params.id);
+  const userId = req.session.userId;
   pool.query(queries.getProductCategoryDistribution, [userId],(error, results) =>{
      if (error) {
       throw error;

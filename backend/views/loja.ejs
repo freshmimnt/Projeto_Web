@@ -21,7 +21,6 @@
         <h2><%= seller.store_name %></h2>
         <p><%= seller.address %></p>
         <p><%= seller.store_category %></p>
-        <p><%= seller.id %></p>
         <% } else { %>
         <h2>Loja não encontrada</h2>
         <% } %>
@@ -31,21 +30,22 @@
     <% if (seller) { %>
     <div class="container-produto">
       <% products.forEach(product => { %>
-      <div class="produto" data-product-id="<%= product.id %>">
-        <img src="<%= product.img %>" alt="Imagem do produto" />
-        <h3 class="nome-produto"><%= product.name %></h3>
-        <h2 class="preco-produto"><%= product.price %>€</h2>
-        <input class="input-size" type="number" value="1" min="1" />
-        <br />
-        <button class="add_carrinho">Adicionar</button>
-      </div>
+      <form action="" method="post">
+        <div class="produto" data-product-id="<%= product.id %>">
+          <img src="<%= product.img %>" alt="Imagem do produto" />
+          <h3 class="nome-produto"><%= product.name %></h3>
+          <h2 class="preco-produto"><%= product.price %>€</h2>
+          <br />
+          <button type="submit" class="add_carrinho">Adicionar</button>
+        </div>
+      </form>
       <% }); %>
     </div>
     <% } %>
     <div class="container">
       <% if (seller) { %>
       <h1>Avalie-nos</h1>
-      <form id="ratingForm" method="post">
+      <form id="ratingForm" action="/users/review" method="post">
         <div class="star-rating">
           <input type="radio" name="rating" id="star1" value="1" /><label
             for="star1"
@@ -73,13 +73,14 @@
           name="comment"
           placeholder="Deixe um comentário"
         ></textarea>
-        <input type="text" hidden="" />
+        <input name="user_seller_id" hidden value="<%= seller.id %>" />
         <button type="submit">Enviar Avaliação</button>
       </form>
       <h2>Avaliações</h2>
       <div id="reviews">
         <% if (reviews.length > 0) { %> <% reviews.forEach(review => { %>
         <div class="review">
+          <h3><%= review.user_name %></h3>
           <div class="stars">
             <% for (let i = 0; i < review.rating; i++) { %>&#9733;<% } %> <% for
             (let i = review.rating; i < 5; i++) { %>&#9734;<% } %>

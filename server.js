@@ -87,7 +87,6 @@ app.get('/categorias/:id', async (req, res) => {
 });
 app.get('/lojas/:id', async (req, res) => {
   const seller_id = parseInt(req.params.id);
-  const userId = req.session.userId;
   try {
     const [productResult, reviewsResult, sellerResult] = await Promise.all([
       pool.query(productQueries.getProductsById, [seller_id]),
@@ -109,7 +108,7 @@ app.get('/lojas/:id', async (req, res) => {
   }
 });
 app.get('/geral', async (req, res) => {
-    const sellerId = 1;
+    const sellerId = req.session.userId;
     try {
       const [averageResult, expensiveResult, cheapestResult] = await Promise.all([
         pool.query(productQueries.average, [sellerId]),

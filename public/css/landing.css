@@ -2,18 +2,27 @@ body, html {
     margin: 0;
     padding: 0;
 }
+
 .nav-bar {
-    background-color: #548149; 
-    overflow: hidden;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 10px; 
+    background-color: #548149;
+    overflow: visible;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 5px;
+    z-index: 1000;
 }
 
 .logo {
-    color: white; 
-}
+    float: left;
+    color: white;
+  }
+  
+  .logo h2 {
+    font-size: 30px;
+    color: white;
+  }
 
 ul {
     list-style-type: none;
@@ -31,12 +40,10 @@ ul li a {
     color: white; 
     text-decoration: none; 
     font-size: 30px;
-    
 }
 
 ul li a:hover {
     text-decoration: none; 
-    
 }
 
 .cx-content {
@@ -48,7 +55,6 @@ ul li a:hover {
 
 .cx-content img {
     margin-left: 50px;
-        
 }
 
 .cx-text {
@@ -56,14 +62,12 @@ ul li a:hover {
     margin-top: 50px;
     display: flex; 
     flex-direction: column; 
-
 }
 
 .cx-text h2, .cx-text p, .cx-text form {
     margin: 0; 
     padding: 5px;
     font-size: 35px;
-   
 }
 
 input[type="submit"] {
@@ -86,7 +90,6 @@ input[type="submit"] {
     font-size: 16px; 
     border: 1px solid #ccc; 
     border-radius: 5px; 
-   
 }
 
 .footer {
@@ -115,7 +118,66 @@ input[type="submit"] {
 }
 
 .footer button:hover {
-    background-color: #45a049; 
+    background-color: #548149;
 }
 
- 
+.slideshow-container {
+    position: relative;
+    width: 100%;     
+    background-color: #548149;
+    overflow: hidden; 
+    border-top: 1px solid black; 
+}
+
+.slide {
+    display: none;
+}
+
+.slide img {
+    width: 100%; 
+    height: auto; 
+    margin: 0; 
+    align-items: center;
+}
+
+.fade {
+    animation: fade 1.5s ease-in-out;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.seller {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+}
+
+
+.seller .btn button {
+    background-color: #DAAB4F; 
+    color: black;
+    font-size: 18px;
+    border: none;
+    padding: 20px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.seller h2{
+    align-items: center;
+    font-size: 35px;
+}
+
+.seller .btn button:hover {
+    background-color: #c49739;
+}

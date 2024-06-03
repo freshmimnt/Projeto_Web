@@ -20,10 +20,10 @@ router.get('/:id', userController.getUserById);
 router.post('/', userController.addUser);
 router.post('/seller', upload.single('img'), userController.addSeller);
 router.post('/login', userController.login);
+router.post('/review', userController.createReview);
 router.put('/:id', userController.updateUser);
 router.delete('/:id', userController.deleteUser);
 router.get('/address/:id', userController.getAddress);
-router.post('/image/:id', userController.image);
 
 
 module.exports = router;

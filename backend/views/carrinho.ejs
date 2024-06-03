@@ -16,13 +16,11 @@
         <i class="fa-solid">Farm2U</i>
       </div>
     </header>
-
     <div class="container">
       <div>
         <h2>Meu Carrinho</h2>
-        <h3>Loja tal - Horário de funcionamento das 9:00 às 16:00</h3>
       </div>
-
+      <form action="">
       <table id="productTable">
         <thead>
           <tr>
@@ -72,7 +70,8 @@
       </div>
 
       <div class="button-container">
-        <button class="button">Finalizar Compra</button>
+        <button type="submit" class="button">Finalizar Compra</button>
+      </form>
         <img
           src="public/img/icons8-carrinho-de-compras-carregado.gif"
           alt=""
@@ -80,98 +79,5 @@
         />
       </div>
     </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-          const tableBody = document.querySelector('#productTable tbody');
-          const valorTotalElement = document.getElementById('valor-total');
-          let valorTotal = 0;
-
-          valorTotalElement.textContent = '€ 0.00';
-
-          const produtosNoCarrinho = localStorage.getItem('produtosCarrinho');
-          let produtos = [];
-
-          if (produtosNoCarrinho) {
-              produtos = JSON.parse(produtosNoCarrinho);
-          }
-
-          produtos.forEach((produto, index) => {
-              const row = document.createElement('tr');
-              row.innerHTML = `
-                  <td>${produto.nome}</td>
-                  <td>${produto.preco.toFixed(2)}€</td>
-                  <td>
-                      <button class="btn-decrement" data-index="${index}">-</button>
-                      <span class="quantidade">${produto.quantidade || 1}</span>
-                      <button class="btn-increment" data-index="${index}">+</button>
-                  </td>
-                  <td><button class="btn-delete" data-index="${index}"><i class="bi bi-trash"></i></button></td>
-              `;
-              tableBody.appendChild(row);
-
-              valorTotal += produto.preco * (produto.quantidade || 1);
-
-          });
-
-          function atualizarCarrinho() {
-              localStorage.setItem('produtosCarrinho', JSON.stringify(produtos));
-              valorTotal = produtos.reduce((total, produto) => total + produto.preco * produto.quantidade, 0);
-              valorTotalElement.textContent = € ${valorTotal.toFixed(2)};
-          }
-
-          document.addEventListener('click', (event) => {
-              const target = event.target;
-              const index = target.dataset.index;
-
-              if (target.closest('.btn-increment')) {
-                  produtos[index].quantidade = (produtos[index].quantidade || 1) + 1;
-                  const quantidadeSpan = target.closest('.btn-increment').parentElement.querySelector('.quantidade');
-                  quantidadeSpan.textContent = produtos[index].quantidade;
-                  atualizarCarrinho();
-              } else if (target.closest('.btn-decrement')) {
-                  if (produtos[index].quantidade > 1) {
-                      produtos[index].quantidade -= 1;
-                      const quantidadeSpan = target.closest('.btn-decrement').parentElement.querySelector('.quantidade');
-                      quantidadeSpan.textContent = produtos[index].quantidade;
-                      atualizarCarrinho();
-                  }
-              } else if (target.closest('.btn-delete')) {
-                  produtos.splice(index, 1);
-                  tableBody.innerHTML = '';
-                  produtos.forEach((produto, index) => {
-                      const row = document.createElement('tr');
-                      row.innerHTML = `
-                          <td>${produto.nome}</td>
-                          <td>${produto.preco.toFixed(2)}€</td>
-                          <td>
-                              <button class="btn-decrement" data-index="${index}">-</button>
-                              <span class="quantidade">${produto.quantidade || 1}</span>
-                              <button class="btn-increment" data-index="${index}">+</button>
-                          </td>
-                          <td><button class="btn-delete" data-index="${index}"><i class="bi bi-trash"></i></button></td>
-                      `;
-                      tableBody.appendChild(row);
-                  });
-                  atualizarCarrinho();
-              }
-          });
-
-          const checkboxEntrega = document.getElementById('comEntrega');
-          const checkboxPickup = document.getElementById('comPickup');
-
-          checkboxEntrega.addEventListener('change', () => {
-              if (checkboxEntrega.checked) {
-                  checkboxPickup.checked = false;
-              }
-          });
-
-          checkboxPickup.addEventListener('change', () => {
-              if (checkboxPickup.checked) {
-                  checkboxEntrega.checked = false;
-              }
-          });
-      });
-    </script>
   </body>
 </html>

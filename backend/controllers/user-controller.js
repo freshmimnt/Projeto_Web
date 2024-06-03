@@ -116,7 +116,6 @@ const addSeller = (req, res) => {
     });
 };
 
-  
 const login = async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -213,6 +212,17 @@ const image = (req, res) => {
     })
 }
 
+const createReview = (req, res) => {
+    const users_id = req.session.userId;
+    const { rating, comment, user_seller_id } = req.body;
+    pool.query(queries.createReview, [rating, comment, users_id, user_seller_id], (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.redirect('/lojas/'+ user_seller_id)
+    })
+}
+
 
 module.exports = {
     getUsers,
@@ -224,4 +234,5 @@ module.exports = {
     login,
     getAddress,
     image,
+    createReview,
 };
