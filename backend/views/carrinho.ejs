@@ -10,6 +10,7 @@
     />
     <title>Carrinho</title>
   </head>
+
   <body>
     <header>
       <div class="head">
@@ -21,64 +22,80 @@
         <h2>Meu Carrinho</h2>
       </div>
       <form action="/orders" method="post">
-      <table id="productTable">
-        <thead>
-          <tr>
-            <th>Produto</th>
-            <th>Preço Unitário</th>
-            <th>Quantidade</th>           
-          </tr>
-        </thead>
-        <% products.forEach(product => { %>
-        <tbody>
-          <tr>
-            <th><%= product.name %></th>
-            <th><%= product.price %>€</th>
-            <th><%= product.quantity%></th>
-            <input name="quantity" hidden value="<%= product.quantity %>">
-            <input name="product_id" hidden value="<%= product.id %>" />
-          </tr>
-        </tbody>
-        <% }); %>
-      </table>
-      <div class="valor-total">
-        <table>
-          <tr>
-            <td><%= sum %></td>
-            <td id="valor-total">€</td>
-          </tr>
+        <table id="productTable">
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Preço Unitário</th>
+              <th>Quantidade</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <% products.forEach(product => { %>
+          <tbody>
+            <tr>
+              <th><%= product.name %></th>
+              <th><%= product.price %>€</th>
+              <th><%= product.quantity%></th>
+              <th>
+                <button type="submit" class="btn btn-danger">Apagar</button>
+              </th>
+              <input name="quantity[]" hidden value="<%= product.quantity %>" />
+              <input name="product_id[]" hidden value="<%= product.id %>" />
+            </tr>
+          </tbody>
+          <% }); %>
         </table>
-      </div>
-      <div class="text">
-        <h3>Escolha a forma para obter seus produtos</h3>
-      </div>
-      <table id="deliveryTable">
-        <tbody>
-          <tr>
-            <td>
-              <input type="checkbox" value="Com Entrega" name="delivery_type" id="comEntrega" /> Com Entrega - taxa 4€
-            </td>
-            <td><input type="checkbox" value="Com Pick-up" name="delivery_type" id="comPickup" /> Com Pick-up</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="text">
-        <h3>Deseja deixar informações extra sobre seu pedido?</h3>
-      </div>
-      <div class="extra-info">
-        <textarea
-          id="extraInfo"
-          rows="4"
-          cols="50"
-          name="note"
-          placeholder="Digite suas informações aqui..."
-        ></textarea>
-      </div>
-      <div class="button-container">
-        <button type="submit" class="button">Finalizar Compra</button>
+        <div class="valor-total">
+          <table>
+            <tr>
+              <td>Total: <%= sum %> €</td>
+            </tr>
+          </table>
+        </div>
+        <div class="text">
+          <h3>Escolha a forma para obter seus produtos</h3>
+        </div>
+        <table id="deliveryTable">
+          <tbody>
+            <tr>
+              <td>
+                <input
+                  type="checkbox"
+                  value="Com Entrega"
+                  name="delivery_type"
+                  id="comEntrega"
+                />
+                Com Entrega - taxa 4€
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  value="Com Pick-up"
+                  name="delivery_type"
+                  id="comPickup"
+                />
+                Com Pick-up
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text">
+          <h3>Deseja deixar informações extra sobre seu pedido?</h3>
+        </div>
+        <div class="extra-info">
+          <textarea
+            id="extraInfo"
+            rows="4"
+            cols="50"
+            name="note"
+            placeholder="Digite suas informações aqui..."
+          ></textarea>
+        </div>
+        <div class="button-container">
+          <button type="submit" class="button">Finalizar Compra</button>
+        </div>
       </form>
-      </div>
     </div>
-    
   </body>
 </html>

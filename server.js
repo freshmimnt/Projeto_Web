@@ -1,6 +1,7 @@
 const express = require('express')
 const session = require('express-session')
 const pgSession = require('connect-pg-simple')(session);
+const methodOverride = require('method-override');
 const lojaRoutes = require('./backend/routes/loja-routes');
 const userRoutes = require('./backend/routes/user-routes')
 const sellerRoutes = require('./backend/routes/seller-routes')
@@ -28,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 app.set('views', './backend/views');
-
+app.use(methodOverride('_method'));
 app.use(session({
     store: new pgSession({
       pool: pool, 
@@ -47,7 +48,7 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 app.get('/logout', (req, res) => {
-  req.session.userId.destroy(); 
+  req.session.destroy(); 
   res.redirect('/'); 
 });
 app.get('/registo-comprador', (req, res) => {
@@ -113,7 +114,6 @@ app.get('/geral', async (req, res) => {
       ]);
       const sellerResult = await pool.query(sellerQueries.getSellerById, [sellerId]); 
       const seller = sellerResult.rows[0]
-
       const data = {
         average: averageResult.rows[0].avg,
         expensive: expensiveResult.rows[0].max,
@@ -159,8 +159,15 @@ app.get('/produtos', async (req, res) => {
       res.status(500).send("Internal Server Error");
   }
 });
-app.get('/gerenciamento', (req, res) => {
-    res.render('gerenciamento');
+app.get('/gerenciamento', async (req, res) => {
+  const sellerId = req.session.userId; 
+  try {
+      const results = await pool.query(orderQueries.getOrdersById, [sellerId]);
+      res.render('gerenciamento', { orders: results.rows }); 
+  } catch (error) {
+      console.error('Error fetching orders:', error);
+      res.status(500).send("Internal Server Error");
+  }
 });
 app.get('/perfil-vendedor', (req, res) => {
     res.render('perfil-vendedor');
@@ -182,6 +189,17 @@ app.get('/carrinho', async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+app.get('/search', async (req, res) => {
+  const searchQuery = req.query.query; 
+  try {
+      const searchResults = await pool.query(lojaQueries.search,[`%${searchQuery}%`]);
+      res.render('search', { results: searchResults.rows });
+  } catch (error) {
+      console.error("Error performing search:", error);
+      res.status(500).send("Internal Server Error");
+  }
+});
+
 app.use('/users', userRoutes);
 app.use('/sellers', sellerRoutes);
 app.use('/sellercategories', sellerCategoriesRoutes);

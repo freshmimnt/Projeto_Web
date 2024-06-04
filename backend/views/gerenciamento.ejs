@@ -33,7 +33,7 @@
     />
 
     <link rel="stylesheet" href="/css/painel_controle_vendedor.css" />
-    <title>painel de Pedidos</title>
+    <title>Painel de Pedidos</title>
   </head>
   <body>
     <nav class="menu-lateral">
@@ -64,53 +64,70 @@
         </li>
       </ul>
     </nav>
-
     <div class="content">
       <h2>Pedidos</h2>
       <% orders.forEach(order => { %>
-      <table>
-        <tr>
-          <th colspan="3">Entregas agendadas</th>
-        </tr>
-        <tr class="text-color">
-          <td colspan="3">Abril</td>
-        </tr>
-        <tr id="entrega">
-          <td colspan="3" style="display: flex; justify-content: space-between">
-            <div>
-              <span class="icon"><i class="bi bi-calendar-check"></i></span>
-              <span class="txt-link">Dia: 05</span>
-              <br />
-              <span class="icon"><i class="bi bi-clock"></i></span>
-              <span class="txt-link">Horário: 16hrs até as 20hrs</span>
-              <br />
-              <span class="icon"><i class="bi bi-geo-fill"></i></span>
-              <span class="txt-link">Local de entrega: Rua blablabla, 6</span>
-              <br />
-              <span class="txt-pedido bold">Pedido num. 0007</span>
-              <span class="spacer"></span>
-              <button class="txt-detalhes" id="openModalBtn1">Detalhes</button>
-            </div>
+      <tr>
+        <td colspan="3" style="display: flex; justify-content: space-between">
+          <div>
+            <span class="txt-link"
+              >Data do Pedido: <%= new
+              Date(order.delivery_date).toLocaleDateString('pt-PT', { day:
+              '2-digit', month: '2-digit' }) %></span
+            ><br />
+            <span class="txt-link"
+              >Hora do Pedido: <%= order.delivery_time %></span
+            ><br />
+            <span class="txt-link">Local de entrega: <%= order.address %></span
+            ><br />
+            <span class="txt-pedido bold"
+              >Pedido num. <%= order.order_id %></span
+            >
+            <span class="spacer"></span>
+            <button
+              class="txt-detalhes"
+              onclick="openModal('myModal<%= order.order_id %>')"
+            >
+              Detalhes
+            </button>
+          </div>
 
-            <div id="myModal1" class="modal">
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Entrega Agendada</h2>
-                <h3>Detalhes do pedido "0007"</h3>
-                <p>2 unid Uva 500g</p>
-                <p>1 unid Laranja 1kg</p>
-                <h4>Notas cliente</h4>
-                <p>Favor entregar entre as 16hrs e 18hrs</p>
-                <br />
-                <p>Contacto com o cliente</p>
-                <p>999-999-999</p>
-                <br />
-                <button id="finalizeSaleBtn1">Finalizar Venda</button>
-              </div>
+          <div id="myModal<%= order.order_id %>" class="modal">
+            <div class="modal-content">
+              <span
+                class="close"
+                onclick="closeModal('myModal<%= order.order_id %>')"
+                >&times;</span
+              >
+              <h2><%= order.delivery_type %></h2>
+              <h3>Detalhes do pedido "<%= order.order_id %>"</h3>
+              <ul>
+                <% for (let i = 0; i < order.product_names.length; i++) { %>
+                <li>
+                  <%= order.product_names[i] %> - Quantidade: <%=
+                  order.quantities[i] %>
+                </li>
+                <% } %>
+              </ul>
+              <h4>Notas cliente</h4>
+              <p><%= order.note %></p>
+              <br />
+              <p>Contacto com o cliente</p>
+              <p>Nome: <%= order.customer_name %></p>
+              <p>Número de telemóvel: <%= order.customer_phone %></p>
+              <br />
+              <form
+                action="/orders/completed/<%= order.order_id %>"
+                method="post"
+              >
+                <button type="submit" id="finalizeSaleBtn<%= order.order_id %>">
+                  Finalizar Venda
+                </button>
+              </form>
             </div>
-          </td>
-        </tr>
-      </table>
+          </div>
+        </td>
+      </tr>
       <% }); %>
     </div>
 
@@ -131,53 +148,22 @@
     ></script>
 
     <script>
-      function setupModal(
-        openBtnId,
-        modalId,
-        closeBtnClass,
-        finalizeBtnId,
-        entregaId
-      ) {
-        var modal = document.getElementById(modalId);
-        var btn = document.getElementById(openBtnId);
-        var span = modal.getElementsByClassName(closeBtnClass)[0];
-        var finalizeBtn = document.getElementById(finalizeBtnId);
-        var entrega = document.getElementById(entregaId);
-
-        btn.onclick = function () {
-          modal.style.display = "block";
-        };
-
-        span.onclick = function () {
-          modal.style.display = "none";
-        };
-
-        finalizeBtn.onclick = function () {
-          entrega.style.display = "none";
-          modal.style.display = "none";
-        };
-
-        window.onclick = function (event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        };
+      function openModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
       }
 
-      setupModal(
-        "openModalBtn1",
-        "myModal1",
-        "close",
-        "finalizeSaleBtn1",
-        "entrega"
-      );
-      setupModal(
-        "openModalBtn2",
-        "myModal2",
-        "close",
-        "finalizeSaleBtn2",
-        "pick-up"
-      );
+      function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+      }
+
+      window.onclick = function (event) {
+        const modals = document.getElementsByClassName("modal");
+        for (let i = 0; i < modals.length; i++) {
+          if (event.target == modals[i]) {
+            modals[i].style.display = "none";
+          }
+        }
+      };
     </script>
   </body>
 </html>

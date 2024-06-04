@@ -40,6 +40,7 @@ const addCart = (req, res) => {
     });
 };
 
+
 module.exports = {
     getLojaById,
     addCart,

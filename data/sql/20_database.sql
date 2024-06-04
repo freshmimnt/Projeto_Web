@@ -47,6 +47,14 @@ CREATE TABLE reviews (
     user_seller_id INT REFERENCES users(id) ON DELETE CASCADE
 );
 
+--create table cart
+Create table cart(
+	id SERIAL PRIMARY KEY,
+	quantity int,
+	users_id INT REFERENCES users(id) ON DELETE CASCADE,
+	product_id int REFERENCES products(id) ON DELETE CASCADE
+);
+
 -- Create table order
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
@@ -55,9 +63,19 @@ CREATE TABLE orders (
     note text,
     state text DEFAULT 'não entregue',
     delivery_type text,
+	quantity int,
     users_id INT REFERENCES users(id) ON DELETE CASCADE,
-    product_id int[] NOT NULL
+    product_id int REFERENCES products(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS "session" (
+    "sid" varchar NOT NULL,
+    "sess" json NOT NULL,
+    "expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+
+ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 --Values seller category
 INSERT INTO seller_categories (name)
@@ -100,25 +118,3 @@ INSERT INTO product_categories (name)
 VALUES ('Água');
 INSERT INTO product_categories (name)
 VALUES ('Sumos e Refrigerantes');
-
---Value user
-INSERT INTO users (name, phone, email, password, img, location, address)
-VALUES ('João Alberto', '999999999', 'exemplo@gmail.com', 'password', '', ST_GeographyFromText('SRID=4326;POINT(-9.14426 38.725427)'),'Rua Luciano Cordeiro 58, 1150-216 Lisbon, Portugal');
-INSERT INTO users (name, phone, email, password, img, location, address, role, iban, store_name, delivery_radius, seller_category_id)
-VALUES ('Maria Helena', '988988988', 'helena@gmail.com', 'helna1234', '/uploads/seller_images/quinta.png', ST_GeomFromText('SRID=4326;POINT(-9.141427566357997 38.70844649701235)'), 'Rua Serpa Pinto 5E, 1200-442 Lisboa', 'seller' ,'PT50 0002 0123 1234 5678 9015 4', 'Agricultora Helena', 15, 1);
-INSERT INTO users (name, phone, email, password, img, location, address, role, iban, store_name, delivery_radius, seller_category_id)
-VALUES ('Luís Fidalgo', '976123098', 'filfil@gmail.com', 'adfwvcsdvsdv', '/uploads/seller_images/mercearia.jpg', ST_GeomFromText('SRID=4326;POINT(-9.147868891540814 38.74134554455972)'), 'Avenida de Berna 6, 1050-040 Lisboa', 'seller', 'PT50 0002 0123 1234 9567 2145 4', 'Mercearia Fidalgo', 25, 2);
-INSERT INTO users (name, phone, email, password, img, location, address)
-VALUES ('Ana Frederica', '901842700', 'anafefe@gmail.com', 'anafede123', '', ST_GeomFromText('SRID=4326;POINT(-9.114450240930786 38.782189956772584)'), 'Rua Pedro Alvares Cabral 84, 2685-228 Moscavide');
-
---Value product
-INSERT INTO products (name, price, product_stock, img, product_category_id, user_seller_id)
-VALUES ('Maça de Alcobaça kg', '1.60',  34, '/uploads/product_images/apple.jpg', 1, 1);
-
---Value review
-INSERT INTO reviews (rating, comment, users_id, user_seller_id)
-VALUES (2, 'Produtos de péssima qualidade',  4, 2);
-
---Value orders
-INSERT INTO orders (delivery_time, delivery_date, note, delivery_type_id, users_id, product_id)
-VALUES ('10:30:00', '2024-06-03', 'Deixar na portaria', 'Entrega ao Domicilio', 4, '{1}');

@@ -108,7 +108,7 @@ const addSeller = (req, res) => {
                         } 
                     } 
                 });
-                res.redirect('/login');
+                res.redirect('/registo-vendedor2');
             } catch (error) {
                 res.status(500).send("Internal Server Error" + error);
             }
@@ -132,7 +132,7 @@ const login = async (req, res) => {
                 req.session.userId = user.id;
                 req.session.userRole = user.role;
                 if (user.role === 'seller') {
-                    res.redirect('/geral');  
+                    res.redirect('/produtos');  
                   } else {
                     res.redirect('/vendedores'); 
                   }

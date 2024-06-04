@@ -4,8 +4,6 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
-
-
 header {
     background-color: #3B5331; 
     width: 100%; 
@@ -14,14 +12,12 @@ header {
     padding: 20px;
 }
 
-
 .head {
     font-size: 35px; 
     color: white;
     
 
 }
-
 
 .container h2 {
     text-align: center;
@@ -32,7 +28,6 @@ header {
     text-align: center;
     margin-top: 20px;
 }
-
 
 table {
     width: 80%; 
@@ -51,8 +46,6 @@ th, td {
     text-align: left;
     border: 1px solid #ccc;
 }
-
-
 
 .btn-minus, .btn-plus {
     background-color: black;

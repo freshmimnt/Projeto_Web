@@ -85,31 +85,6 @@
           </div>
         </div>
       </div>
-      <div class="grafico">
-        <canvas id="grafico2" style="width: 900px; height: 500px"></canvas>
-      </div>
     </div>
-    <script>
-      const sellerId = req.session.userId;
-      fetch(`/sellers/productDistribution/${sellerId}`) // Correct route path
-        .then((response) => response.json())
-        .then((chartData) => {
-          const ctx2 = document.getElementById("grafico2").getContext("2d");
-
-          // Check if the chart exists before destroying it
-          if (window.myDoughnutChart) {
-            window.myDoughnutChart.destroy();
-          }
-
-          window.myDoughnutChart = new Chart(ctx2, {
-            // ... (rest of the Chart.js configuration)
-          });
-        })
-        .catch((error) => {
-          console.error("Error fetching chart data:", error);
-          // Display an error message to the user (e.g., using an alert or a specific element in your HTML)
-          alert("Error loading the chart. Please try again later.");
-        });
-    </script>
   </body>
 </html>
