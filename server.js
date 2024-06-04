@@ -7,20 +7,21 @@ const sellerRoutes = require('./backend/routes/seller-routes')
 const sellerCategoriesRoutes = require('./backend/routes/sellercategory-routes')
 const productRoutes = require('./backend/routes/product-routes')
 const productCategoriesRoutes = require('./backend/routes/productcategory-routes')
+const orderRoutes = require('./backend/routes/order-routes')
 const productQueries = require('./backend/queries/product-queries');
 const sellerQueries = require('./backend/queries/seller-queries');
 const userQueries = require('./backend/queries/user-queries');
 const sellerCategoriesQueries = require('./backend/queries/sellercategory-queries');
 const productCategoryQueries = require('./backend/queries/productcategory-queries');
+const lojaQueries = require('./backend/queries/loja-queries');
 const orderQueries = require('./backend/queries/order-queries');
 const pool = require('./backend/models/database');
 const dotenv = require('dotenv')
-
+const bodyParser = require('body-parser');
 dotenv.config()
 
 const app = express();
-const PORT = 10000
-
+const PORT = 4000
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -46,8 +47,8 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 app.get('/logout', (req, res) => {
-  req.session.destroy(); 
-  res.redirect('/login'); 
+  req.session.userId.destroy(); 
+  res.redirect('/'); 
 });
 app.get('/registo-comprador', (req, res) => {
   res.render('registo-comprador');
@@ -110,11 +111,14 @@ app.get('/geral', async (req, res) => {
         pool.query(productQueries.expensive, [sellerId]),
         pool.query(productQueries.cheapest, [sellerId])
       ]);
-  
+      const sellerResult = await pool.query(sellerQueries.getSellerById, [sellerId]); 
+      const seller = sellerResult.rows[0]
+
       const data = {
         average: averageResult.rows[0].avg,
         expensive: expensiveResult.rows[0].max,
-        cheapest: cheapestResult.rows[0].min
+        cheapest: cheapestResult.rows[0].min,
+        seller
       };
       res.render('visão-geral', data);
     } catch (error) {
@@ -162,13 +166,29 @@ app.get('/perfil-vendedor', (req, res) => {
     res.render('perfil-vendedor');
 });
 app.get('/perfil', (req, res) => {
-    res.render('perfil');
+  res.render('perfil');
+});
+app.get('/carrinho', async (req, res) => {
+  const userId = req.session.userId;
+  try{
+    const [cartProducts, sumProducts] = await Promise.all([
+      pool.query(lojaQueries.getCartProductsById, [userId]),
+      pool.query(lojaQueries.sumCartProducts)
+    ]);
+    const sum = sumProducts.rows[0].sum
+    res.render('carrinho', {products: cartProducts.rows, sum});
+  }catch (error) {
+    console.error("Error fetching products or categories:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 app.use('/users', userRoutes);
 app.use('/sellers', sellerRoutes);
 app.use('/sellercategories', sellerCategoriesRoutes);
 app.use('/products', productRoutes);
 app.use('/productcategories', productCategoriesRoutes);
+app.use('/loja', lojaRoutes);
+app.use('/orders', orderRoutes);
 app.use(express.static('public'));
 
 app.listen(PORT, ()=>{

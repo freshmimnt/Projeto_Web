@@ -26,12 +26,17 @@ const getLojaById = async (req, res) => {
 
 const addCart = (req, res) => {
     const userId = parseInt(req.session.userId);
-    const productId = parseInt(req.body.productId);
-    pool.query(lojaQueries.addCart, [userId, productId], (error, results) => {
+    console.log(userId)
+    const product_id = parseInt(req.body.product_id);
+    console.log(product_id)
+    const user_seller_id = parseInt(req.body.user_seller_id);
+    console.log(user_seller_id)
+    const quantity = parseInt(req.body.quantity); 
+    pool.query(lojaQueries.addCart, [userId, product_id, quantity], (error, results) => {
         if (error) {
             throw error;
         }
-        res.render('/cart')
+        res.redirect('/lojas/'+ user_seller_id)
     });
 };
 
