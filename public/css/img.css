@@ -1,0 +1,36 @@
+.produto img {
+    width: 200px;
+    height: 150px;
+    border-radius: 10%;
+}
+
+.comentario img {
+    width: 40px;
+    height: 35px;
+    margin-right: 10px;
+    border-radius: 100%;
+}
+
+.meu-carrinho img {
+    width: 200px;
+    height: 150px;
+    margin-top: 5px;
+    margin-left: 10px;
+    border-radius: 10%;
+}
+
+.seller-card img {
+    width: 150px;     
+    height: 150px;     
+    object-fit: cover;  
+    display: block;     
+    margin: 0 auto;     
+}
+
+.produto img {
+    max-width: 100%;             
+    height: auto;                
+    margin-bottom: 15px;
+}
+
+  

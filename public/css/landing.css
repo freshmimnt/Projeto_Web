@@ -1,0 +1,183 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-bar {
+    background-color: #548149;
+    overflow: visible;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 5px;
+    z-index: 1000;
+}
+
+.logo {
+    float: left;
+    color: white;
+  }
+  
+  .logo h2 {
+    font-size: 30px;
+    color: white;
+  }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    display: inline; 
+    margin-left: 28px;
+    margin-right: 15px;
+}
+
+ul li a {
+    color: white; 
+    text-decoration: none; 
+    font-size: 30px;
+}
+
+ul li a:hover {
+    text-decoration: none; 
+}
+
+.cx-content {
+    display: flex; 
+    align-items: flex-start; 
+    background-color: #DAAB4F; 
+    padding: 20px; 
+}
+
+.cx-content img {
+    margin-left: 50px;
+}
+
+.cx-text {
+    margin-left: 70px;
+    margin-top: 50px;
+    display: flex; 
+    flex-direction: column; 
+}
+
+.cx-text h2, .cx-text p, .cx-text form {
+    margin: 0; 
+    padding: 5px;
+    font-size: 35px;
+}
+
+input[type="submit"] {
+    background-color: #548149;
+    color: white;
+    font-size: 18px;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cx-text h2 {
+    font-size: 50px;
+}
+
+.text {
+    width: 300px; 
+    padding: 10px; 
+    font-size: 16px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+}
+
+.footer {
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    text-align: center; 
+    margin-top: 20px;
+}
+
+.footer h2 {
+    margin-right: 20px; 
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.footer button {
+    background-color: #548149; 
+    color: white;
+    border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 5px;
+}
+
+.footer button:hover {
+    background-color: #548149;
+}
+
+.slideshow-container {
+    position: relative;
+    width: 100%;     
+    background-color: #548149;
+    overflow: hidden; 
+    border-top: 1px solid black; 
+}
+
+.slide {
+    display: none;
+}
+
+.slide img {
+    width: 100%; 
+    height: auto; 
+    margin: 0; 
+    align-items: center;
+}
+
+.fade {
+    animation: fade 1.5s ease-in-out;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.seller {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+}
+
+
+.seller .btn button {
+    background-color: #DAAB4F; 
+    color: black;
+    font-size: 18px;
+    border: none;
+    padding: 20px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.seller h2{
+    align-items: center;
+    font-size: 35px;
+}
+
+.seller .btn button:hover {
+    background-color: #c49739;
+}

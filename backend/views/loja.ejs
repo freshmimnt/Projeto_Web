@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loja do Comerciante</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/loja.css" />
+    <link rel="stylesheet" href="/css/img.css" />
+    <link rel="stylesheet" href="/css/font.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    <div class="barra">
+      <div class="avaliacoes">
+        <% if (seller) { %>
+        <h2><%= seller.store_name %></h2>
+        <p><%= seller.address %></p>
+        <p><%= seller.store_category %></p>
+        <% } else { %>
+        <h2>Loja não encontrada</h2>
+        <% } %>
+      </div>
+    </div>
+    <br />
+    <% if (seller) { %>
+    <div class="container-produto">
+      <% products.forEach(product => { %>
+        <form action="/loja" method="post">
+      <div class="produto" data-product-id="<%= product.id %>">
+        <img src="<%= product.img %>" alt="Imagem do produto" />
+        <h3 class="nome-produto"><%= product.name %></h3>
+        <h2 class="preco-produto"><%= product.price %>€</h2>
+        <input type="number" name="quantity">
+        <br />     
+        <input name="product_id" hidden value="<%= product.id %>" />
+        <input name="user_seller_id" hidden value="<%= seller.id %>" />
+        <button type="submit" class="add_carrinho">Adicionar</button>
+        </form>
+      </div>
+      <% }); %>
+    </div>
+    <% } %>
+    <div class="container">
+      <% if (seller) { %>
+      <h1>Avalie-nos</h1>
+      <form id="ratingForm" action="/users/review" method="post">
+        <div class="star-rating">
+          <input type="radio" name="rating" id="star1" value="1" /><label
+            for="star1"
+            >&#9733;</label
+          >
+          <input type="radio" name="rating" id="star2" value="2" /><label
+            for="star2"
+            >&#9733;</label
+          >
+          <input type="radio" name="rating" id="star3" value="3" /><label
+            for="star3"
+            >&#9733;</label
+          >
+          <input type="radio" name="rating" id="star4" value="4" /><label
+            for="star4"
+            >&#9733;</label
+          >
+          <input type="radio" name="rating" id="star5" value="5" /><label
+            for="star5"
+            >&#9733;</label
+          >
+        </div>
+        <textarea
+          id="comment"
+          name="comment"
+          placeholder="Deixe um comentário"
+        ></textarea>
+        <input name="user_seller_id" hidden value="<%= seller.id %>" />
+        <button type="submit">Enviar Avaliação</button>
+      </form>
+      <h2>Avaliações</h2>
+      <div id="reviews">
+        <% if (reviews.length > 0) { %> <% reviews.forEach(review => { %>
+        <div class="review">
+          <h3><%= review.user_name %></h3>
+          <div class="stars">
+            <% for (let i = 0; i < review.rating; i++) { %>&#9733;<% } %> <% for
+            (let i = review.rating; i < 5; i++) { %>&#9734;<% } %>
+          </div>
+          <p><%= review.comment %></p>
+        </div>
+        <% }); %> <% } else { %>
+        <p>Ainda não há avaliações para esta loja.</p>
+        <% } %>
+      </div>
+      <% } %>
+    </div>
+    <%- include('partials/footer') %>
+  </body>
+</html>

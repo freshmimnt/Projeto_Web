@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing</title>
+    <link rel="stylesheet" href="/css/landing.css" />
+    <link rel="stylesheet" href="/css/font.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <%- include('partials/header-landingpage') %>
+    <div class="slideshow-container">
+      <div class="slide fade">
+        <img src="/img/Picture16.png" />
+      </div>
+
+      <div class="slide fade">
+        <img src="/img/Picture13.png" />
+      </div>
+
+      <div class="slide fade">
+        <img src="/img/Picture14.png" />
+      </div>
+      <div class="slide fade">
+        <img src="/img/Picture15.png" />
+      </div>
+    </div>
+
+    <div class="seller">
+      <h2>
+        Deseja <strong><em>vender</em></strong> seus produtos?
+      </h2>
+
+      <h2>Registra-se como Vendedor</h2>
+      <div class="btn">
+        <a href="/registo-vendedor"><button>Registra-se</button></a>
+      </div>
+    </div>
+    <%- include('partials/footer') %>
+
+    <script>
+      let slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        let slides = document.getElementsByClassName("slide");
+        for (let i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+          slideIndex = 1;
+        }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 3000);
+      }
+    </script>
+  </body>
+</html>

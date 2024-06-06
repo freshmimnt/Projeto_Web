@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categorias</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="/css/categorias.css" type="text/css" />
+    <link rel="stylesheet" href="/css/img.css" type="text/css" />
+    <link rel="stylesheet" href="/css/font.css" type="text/css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+
+    <div class="seller">
+      <div class="title">
+        <h2>Todos/as os/as <%= category.name %> disponíveis</h2>
+      </div>
+      <div class="row" id="sellerRow">
+        <% sellers.forEach((seller) => { %>
+        <div class="seller-card">
+          <img src="<%= seller.img %>" alt="Seller Image" />
+          <div class="seller-info">
+            <h3><%= seller.store_name %></h3>
+            <p><%= seller.store_category %></p>
+          </div>
+          <div class="seller-btn">
+            <a href="/lojas/<%= seller.id %> ">
+              <button>Ver Perfil</button>
+            </a>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+    <%- include('partials/footer') %>
+  </body>
+</html>

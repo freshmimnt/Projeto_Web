@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/img.css" type="text/css" />
+    <link rel="stylesheet" href="/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="/css/lojas.css" type="text/css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <div class="topnav">
+        <div class="logo"><a href="/vendedores">Farm2U</a></div>
+        <div class="topnav-center">
+          <form action="/search" method="GET">
+            <input type="text" name="query" placeholder="Search.." />
+            <button type="submit"><i class="bx bx-search-alt-2"></i></button>
+          </form>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn">Categorias</button>
+          <div class="dropdown-content" id="categoryDropdown"></div>
+        </div>
+        <div class="topnav-right">
+          <a href="/carrinho"><i class="bx bxs-shopping-bag"></i></a>
+          <div class="user-dropdown">
+            <a href="/login-usuario.html"><i class="bx bx-user"></i></a>
+            <div class="user-dropdown-content">
+              <a href="/perfil">Perfil</a>
+              <a href="/logout">Sair</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <script>
+      fetch("/sellercategories/all")
+        .then((response) => response.json())
+        .then((categories) => {
+          const dropdown = document.getElementById("categoryDropdown");
+          categories.forEach((category) => {
+            const link = document.createElement("a");
+            link.href = `/categorias/${category.id}`;
+            link.textContent = category.name;
+            dropdown.appendChild(link);
+          });
+        });
+    </script>
+  </body>
+</html>

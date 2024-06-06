@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    platform: linux/amd64
+    restart: always
+    environment:
+      POSTGRES_DB: farm2u_db
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: p4ssw0rd
+      POSTGRES_PORT: 5432
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker-data/db:/var/lib/postgresql/data
+      - ./data/sql:/docker-entrypoint-initdb.d
+
